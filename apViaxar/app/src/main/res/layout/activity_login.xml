@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#D9D9D9"
     android:backgroundTint="#D9D9D9"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <TextView
         android:id="@+id/tvMensagem"
