@@ -1,4 +1,4 @@
-package cotuca.aplicativo.viaxar.ui.travelerkit;
+package cotuca.aplicativo.viaxar.ui.explore;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,17 +13,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import cotuca.aplicativo.viaxar.R;
+import cotuca.aplicativo.viaxar.ui.favorites.FavoritesViewModel;
+import cotuca.aplicativo.viaxar.ui.home.HomeViewModel;
 
-public class TravelerKitFragment extends Fragment {
+public class ExploreFragment extends Fragment {
 
-    private TravelerKitViewModel travelerKitViewModel;
+    private ExploreViewModel exploreViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        travelerKitViewModel = ViewModelProviders.of(this).get(TravelerKitViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_kit, container, false);
-        final TextView textView = root.findViewById(R.id.text_travelerkit);
-        travelerKitViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        exploreViewModel =
+                ViewModelProviders.of(this).get(ExploreViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_explore, container, false);
+        final TextView textView = root.findViewById(R.id.text_explore);
+        exploreViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

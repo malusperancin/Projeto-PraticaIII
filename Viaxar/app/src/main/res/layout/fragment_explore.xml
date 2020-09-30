@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.travelerkit.TravelerKitFragment">
+    tools:context=".ui.explore.ExploreFragment">
 
     <TextView
-        android:id="@+id/text_travelerkit"
+        android:id="@+id/text_explore"
+        android:text="Fragmento do Explore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

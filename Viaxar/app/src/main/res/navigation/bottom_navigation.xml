@@ -3,13 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_info">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/nav_info"
-        android:name="cotuca.aplicativo.viaxar.ui.informations.InformationsFragment"
-        android:label="Informations"
-        tools:layout="@layout/fragment_informations" />
+        android:id="@+id/nav_home"
+        android:name="cotuca.aplicativo.viaxar.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_explore"
+        android:name="cotuca.aplicativo.viaxar.ui.explore.ExploreFragment"
+        android:label="Explore"
+        tools:layout="@layout/fragment_explore" />
+
+    <fragment
+        android:id="@+id/nav_world"
+        android:name="cotuca.aplicativo.viaxar.ui.world.WorldFragment"
+        android:label="World"
+        tools:layout="@layout/fragment_world" />
 
     <fragment
         android:id="@+id/nav_fav"
@@ -18,10 +30,14 @@
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
+        android:id="@+id/nav_info"
+        android:name="cotuca.aplicativo.viaxar.ui.informations.InformationsFragment"
+        android:label="Informations"
+        tools:layout="@layout/fragment_informations" />
+
+    <fragment
         android:id="@+id/nav_kit"
         android:name="cotuca.aplicativo.viaxar.ui.travelerkit.TravelerKitFragment"
         android:label="Traveler Kit"
         tools:layout="@layout/fragment_kit" />
-
-
 </navigation>

@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.travelerkit.TravelerKitFragment">
+    tools:context=".ui.world.WorldFragment">
 
     <TextView
-        android:id="@+id/text_travelerkit"
+        android:id="@+id/text_world"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

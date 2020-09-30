@@ -4,65 +4,71 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    Toolbar toolbar;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-        toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_app);
+
+        /*SIDE NAV*/
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navi = findViewById(R.id.nav_view);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.side_nav_menu);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_info, R.id.nav_fav, R.id.nav_kit).setDrawerLayout(drawer).build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+                R.id.nav_info, R.id.nav_fav, R.id.nav_kit, R.id.nav_exit)
+                .setDrawerLayout(drawerLayout)
+                .build();
+        final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navi, navController);
-        setContentView(R.layout.activity_bottom_menu);
-        BottomNavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        /* BOTTOM NAV */
+        BottomNavigationView navView = findViewById(R.id.nav_bottom);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_explore,R.id.nav_world, R.id.nav_fav, R.id.nav_info)
+                .build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menu){
-                if(menu.getItemId() == R.id.nav_menu)
-                if(drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                    drawer.setVisibility(drawer.INVISIBLE);
-                }
-                else{
-                    drawer.openDrawer(GravityCompat.START);
-                    drawer.setVisibility(drawer.VISIBLE);
-                    drawer.open();
-                }
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_info)
+                    switchDrawer(drawerLayout);
+                else
+                    return NavigationUI.onNavDestinationSelected(item, navController);
                 return true;
             }
         });
-        // setContentView(R.layout.activity_menu);
-        //toolbar.setTitle("");
-        // Passing each bottom_menu ID as a set of Ids because each
-        // bottom_menu should be considered as top level destinations.
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the bottom_menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.bottom_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -74,13 +80,11 @@ public class MenuActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public class MyActivity extends AppCompatActivity {
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.app_bar_main);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().hide();
-        }
+    private void switchDrawer(DrawerLayout drawer)
+    {
+        if(drawer.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+        else
+            drawer.openDrawer(GravityCompat.START);
     }
 }
