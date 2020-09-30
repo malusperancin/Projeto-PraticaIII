@@ -1,63 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#595959"
+    android:orientation="vertical"
+    android:padding="30dp"
     tools:context=".ui.informations.InformationsFragment">
 
     <TextView
         android:id="@+id/text_informations"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="76dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/bukhariscriptttf"
-        android:text="teste"
+        android:text="Editar Informações"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="336dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="167dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="35dp" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="333dp"
-        android:layout_height="49dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="96dp" />
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="332dp"
-        android:layout_height="41dp"
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="370dp" />
+        android:inputType="textEmailAddress"
+        android:text="Email"
+        android:textColor="#FFFFFF" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
-        android:layout_width="328dp"
-        android:layout_height="48dp"
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="300dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:inputType="phone"
+        android:text="Celular"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="344dp"
+        android:layout_height="54dp">
+
+        <Button
+            android:id="@+id/btnAlterarSenha"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/button_bg"
+            android:backgroundTint="#1EAAF1"
+            android:enabled="false"
+            android:text="TROCAR SENHA"
+            android:textColor="@color/azul" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/editTextTextPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingVertical="10dp"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnSalvarSenha"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/button_lg"
+            android:backgroundTint="#1EAAF1"
+            android:enabled="false"
+            android:text="Salvar"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSalvarTudo"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/button_lg"
+        android:backgroundTint="#1EAAF1"
+        android:enabled="false"
+        android:text="Salvar"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
