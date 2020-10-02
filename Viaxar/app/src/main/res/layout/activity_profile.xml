@@ -105,30 +105,28 @@
                 android:textColor="#FFFFFF" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:gravity="end">
+                android:layout_width="344dp"
+                android:layout_height="54dp">
 
                 <Button
                     android:id="@+id/btnAlterarSenha"
                     android:layout_width="120dp"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="start"
                     android:layout_marginBottom="56dp"
-                    android:background="@drawable/button_bg"
+                    android:background="@drawable/button_lg"
                     android:backgroundTint="#1EAAF1"
-                    android:editable="true"
-                    android:enabled="true"
-                    android:fadeScrollbars="false"
-                    android:text="Trocar Senha"
-                    android:textColor="@color/azul" />
+                    android:enabled="false"
+                    android:text="TROCAR SENHA"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lt_trocarSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:orientation="vertical">
 
 
                 <EditText
@@ -139,8 +137,7 @@
                     android:ems="10"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone" />
+                    android:textColor="#FFFFFF" />
 
                 <EditText
                     android:id="@+id/edtPassConfirm"
@@ -151,20 +148,18 @@
                     android:hint="Confirm password"
                     android:inputType="textPassword"
                     android:paddingVertical="10dp"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone" />
+                    android:textColor="#FFFFFF" />
 
                 <Button
                     android:id="@+id/btnSalvarSenha"
                     android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="end"
-                    android:background="@drawable/button_lg"
+                    android:layout_height="48dp"
+                    android:layout_gravity="start"
+                    android:background="@drawable/button_bg"
                     android:backgroundTint="#1EAAF1"
                     android:enabled="false"
                     android:text="Salvar"
-                    android:textColor="@color/white"
-                    android:visibility="gone" />
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <Button
@@ -177,9 +172,8 @@
                 android:background="@drawable/button_lg"
                 android:backgroundTint="#1EAAF1"
                 android:enabled="false"
-                android:text="Salvar Tudo"
-                android:textColor="#FFFFFF"
-                android:textSize="16dp" />
+                android:text="Salvar"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

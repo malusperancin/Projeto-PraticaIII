@@ -1,10 +1,8 @@
 package cotuca.aplicativo.viaxar;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -30,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_app);
 
         /*SIDE NAV*/
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.tb_titulo);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -65,6 +63,12 @@ public class MenuActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

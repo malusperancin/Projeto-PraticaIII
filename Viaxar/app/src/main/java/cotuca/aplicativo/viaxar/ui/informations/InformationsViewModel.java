@@ -11,6 +11,7 @@ public class InformationsViewModel extends ViewModel {
     public InformationsViewModel() {
         mText = new MutableLiveData<>();
         // mText.setValue("This is informations fragment");
+
     }
 
     public LiveData<String> getText() {

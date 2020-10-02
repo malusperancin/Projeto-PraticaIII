@@ -14,7 +14,7 @@
 
         <!--TOOLBAR TOP-->
        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/tb_titulo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
 
