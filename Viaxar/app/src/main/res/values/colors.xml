@@ -5,4 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
     <color name="azul">#1EAAF1</color>
+    <color name="cinzaexplorar"> #EEEEEE</color>
+
 </resources>
