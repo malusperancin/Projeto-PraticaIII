@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    tools:context=".PaisesActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#595959"
+            app:layout_anchor="@+id/tb_titulo"
+            app:layout_anchorGravity="center"
+            app:popupTheme="@style/AppTheme.TitleFont">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bukhariscriptttf"
+                android:text="Countries"
+                android:textColor="@android:color/background_light"
+                android:textSize="35dp" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_voltar" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="80dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="0dp"
+                android:foregroundTint="#FFFFFF"
+                android:src="@drawable/ic_explore" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_row="0"
+            android:layout_column="0">
+            <GridLayout
+                android:id="@+id/listaPaises"
+                android:layout_width="409dp"
+                android:layout_height="597dp"
+                android:layout_marginTop="61dp"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

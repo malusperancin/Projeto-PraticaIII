@@ -6,5 +6,6 @@
     <color name="white">#FFFFFF</color>
     <color name="azul">#1EAAF1</color>
     <color name="cinzaexplorar"> #EEEEEE</color>
-
+    <color name="cinzaToolbar"> #595959 </color>
+    <color name="cinzaFundo"> #212121 </color>
 </resources>

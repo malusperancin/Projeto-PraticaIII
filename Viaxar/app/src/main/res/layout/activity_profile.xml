@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#595959"
+    android:background="#212121"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawHorizontalTrack="false"
     android:scrollbarAlwaysDrawVerticalTrack="false"
@@ -19,7 +19,7 @@
             android:id="@+id/tb_titulo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/azul"
+            android:background="#595959"
             app:popupTheme="@style/AppTheme.TitleFont">
 
             <TextView

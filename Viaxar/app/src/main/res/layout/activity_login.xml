@@ -162,8 +162,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="194dp"
-        android:layout_height="91dp"
+        android:layout_width="197dp"
+        android:layout_height="59dp"
         android:fontFamily="@font/bukhariscriptttf"
         android:text="Welcome,"
         android:textColor="#686868"
