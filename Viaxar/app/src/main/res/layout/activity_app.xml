@@ -22,7 +22,7 @@
         <include layout="@layout/content_main"></include>
 
         <!--BOTTOM NAV-->
-        <include layout="@layout/activity_menu_bottom"></include>
+        <include layout="@layout/activity_menu"></include>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

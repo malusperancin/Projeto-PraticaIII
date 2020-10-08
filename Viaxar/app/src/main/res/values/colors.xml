@@ -8,4 +8,5 @@
     <color name="cinzaexplorar"> #EEEEEE</color>
     <color name="cinzaToolbar"> #595959 </color>
     <color name="cinzaFundo"> #212121 </color>
+    <color name="transparente">#00000000</color>
 </resources>

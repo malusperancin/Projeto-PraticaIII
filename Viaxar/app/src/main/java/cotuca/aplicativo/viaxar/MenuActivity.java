@@ -32,7 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.side_nav_menu);
+       NavigationView navigationView = findViewById(R.id.side_nav_menu);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -44,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-        /* BOTTOM NAV */
+         /* BOTTOM NAV */
         BottomNavigationView navView = findViewById(R.id.nav_bottom);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

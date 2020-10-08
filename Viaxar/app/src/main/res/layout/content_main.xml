@@ -7,11 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_app">
 
-    <!--<androidx.core.widget.NestedScrollView
-        constraint
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">-->
-
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -23,6 +18,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/bottom_navigation" />
-    <!--</androidx.core.widget.NestedScrollView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
