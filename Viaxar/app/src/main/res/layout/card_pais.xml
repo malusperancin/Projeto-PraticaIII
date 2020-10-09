@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearhorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#212121"
+    android:elevation="2dp"
+    android:orientation="horizontal"
+    app:cardCornerRadius="10dp"
+    app:contentPadding="5dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2sp"
+            android:text="Nome"
+            android:textAlignment="center"
+            android:textColor="@color/cinzaFundo"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="184dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingHorizontal="5dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="10sp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at eros sodales, aliquam nibh eu, consectetur urna. Proin mi orci, volutpat sit amet auctor id, accumsan eu. "
+            android:textAlignment="center"
+            android:textColor="@color/cinzaFundo"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

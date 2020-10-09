@@ -86,6 +86,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <FrameLayout android:layout_height="match_parent"
+                android:layout_width="match_parent">
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,18 +107,24 @@
                         android:id="@+id/btnCidade1"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
+                        android:layout_marginHorizontal="2sp"
+                        android:backgroundTint="#C8C8C8"
                         android:text="" />
 
                     <Button
                         android:id="@+id/btnCidade2"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
+                        android:layout_marginHorizontal="2sp"
+                        android:backgroundTint="#C8C8C8"
                         android:text="" />
 
                     <Button
                         android:id="@+id/btnCidade3"
                         android:layout_width="100dp"
                         android:layout_height="25dp"
+                        android:layout_marginHorizontal="2sp"
+                        android:backgroundTint="#C8C8C8"
                         android:text="" />
 
                 </LinearLayout>
@@ -131,7 +139,7 @@
                         android:id="@+id/imageView8"
                         android:layout_width="match_parent"
                         android:layout_height="167dp"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                     <TextView
                         android:id="@+id/tvEstado"
@@ -139,18 +147,56 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/imageView8"
                         android:layout_alignEnd="@id/imageView8"
-                        android:text="Estado/Provincia" />
+                        android:layout_margin="5sp"
+                        android:text="Estado/Provincia"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvNome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/imageView8"
+                        android:layout_margin="5sp"
                         android:layout_marginTop="0dp"
-                        android:text="Nome-Cidade" />
+                        android:text="Nome-Cidade"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnabrir"
+                        android:layout_width="50sp"
+                        android:layout_height="50sp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="146dp"
+                        android:backgroundTint="#FB0000"
+                        android:text="A"
+                        android:visibility="visible" />
 
                 </RelativeLayout>
+
             </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/descricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:background="@drawable/tableborder"
+                    android:backgroundTint="@color/cinzaToolbar"
+                    android:padding="12sp"
+                    android:text="O Brasil, um vasto país sul-americano, estende-se da Bacia Amazônica, no norte, até os vinhedos e as gigantescas Cataratas do Iguaçu, no sul. O Rio de Janeiro, simbolizado pela sua estátua de 38 metros de altura do Cristo Redentor, situada no topo do Corcovado, é famoso pelas movimentadas praias de Copacabana e Ipanema, bem como pelo imenso e animado Carnaval, com desfiles de carros alegóricos, fantasias extravagantes e samba."
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -158,125 +204,243 @@
                 android:stretchColumns="*"
                 android:layout_margin="10dp"
                 >
+
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="Capital"
                         android:textAlignment="center"
-                    />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvCapital"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Capital"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="Lingua"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvLingua"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lingua"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="Moeda"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvMoeda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Moeda"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
+
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="População"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvPopulacao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="População"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
+
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="Clima"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvClima"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Clima"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
+
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="Religiao"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvReligiao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Religiao"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
+
                 <TableRow
-                    android:layout_width="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp">
+
                     <TextView
                         android:id="@+id/tv7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/tableborder"
+                        android:backgroundTint="@color/cinzaToolbar"
                         android:text="LGBTQIA+"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/tvLGBT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LGBTQIA+"
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
                 </TableRow>
 
             </TableLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPontosTuristicos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pontos Turisticos"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/tvArtes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Artes"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/tvCulinaria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Culinaria"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </HorizontalScrollView>
+            </LinearLayout>
+
+
         </LinearLayout>
 
-    </ScrollView>
 
+    </ScrollView>
 </LinearLayout>

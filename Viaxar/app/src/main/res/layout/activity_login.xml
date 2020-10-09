@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="I'm a new user."
+            android:textColor="@color/cinzaToolbar"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +53,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.948"/>
+            app:layout_constraintVertical_bias="0.948" />
 
         <TextView
             android:id="@+id/tvCadastro"
@@ -133,10 +134,10 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/button_bg"
-        android:backgroundTint="#D34A4545"
+        android:backgroundTint="@color/cinzaToolbar"
         android:enabled="true"
         android:text="FORGOT PASSWORD"
-        android:textColor="#D34A4545"
+        android:textColor="#D3FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,7 +167,7 @@
         android:layout_height="59dp"
         android:fontFamily="@font/bukhariscriptttf"
         android:text="Welcome,"
-        android:textColor="#686868"
+        android:textColor="@color/cinzaToolbar"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -182,7 +183,7 @@
         android:layout_height="45dp"
         android:fontFamily="@font/bukhariscriptttf"
         android:text="Sign in to continue!"
-        android:textColor="#686868"
+        android:textColor="@color/cinzaToolbar"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

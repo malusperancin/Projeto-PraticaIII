@@ -10,7 +10,6 @@ public class WorldViewModel extends ViewModel {
 
     public WorldViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is world fragment");
     }
 
     public LiveData<String> getText() {

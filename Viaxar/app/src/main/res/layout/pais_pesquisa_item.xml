@@ -34,7 +34,7 @@
             android:paddingLeft="12dp">
 
             <TextView
-                android:id="@+id/tvPais2"
+                android:id="@+id/tvNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cidade"
@@ -52,7 +52,7 @@
                 android:visibility="visible" />
 
             <TextView
-                android:id="@+id/tvContinente"
+                android:id="@+id/tvDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
