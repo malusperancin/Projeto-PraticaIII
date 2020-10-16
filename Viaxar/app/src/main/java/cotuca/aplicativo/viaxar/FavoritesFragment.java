@@ -1,4 +1,4 @@
-package cotuca.aplicativo.viaxar.ui.favorites;
+package cotuca.aplicativo.viaxar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,18 +16,11 @@ import cotuca.aplicativo.viaxar.R;
 
 public class FavoritesFragment extends Fragment {
 
-    private FavoritesViewModel favoritesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        favoritesViewModel =
-                ViewModelProviders.of(this).get(FavoritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-        //favoritesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-         //   @Override
-         //   public void onChanged(@Nullable String s) {
-         //   }
-        //});
+
         return root;
     }
 }

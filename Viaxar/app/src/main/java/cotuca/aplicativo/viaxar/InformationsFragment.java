@@ -1,4 +1,4 @@
-package cotuca.aplicativo.viaxar.ui.informations;
+package cotuca.aplicativo.viaxar;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -27,12 +27,10 @@ import cotuca.aplicativo.viaxar.R;
 
 public class InformationsFragment extends Fragment {
 
-    private InformationsViewModel informationsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        informationsViewModel =
-                ViewModelProviders.of(this).get(InformationsViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_informations, container, false);
 
         final Button btnAlterarSenha = (Button) root.findViewById(R.id.btnAlterarSenha);

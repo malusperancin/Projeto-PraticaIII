@@ -8,7 +8,8 @@
     android:orientation="vertical"
     android:scrollbarAlwaysDrawHorizontalTrack="false"
     android:scrollbarAlwaysDrawVerticalTrack="false"
-    tools:context=".ui.informations.InformationsFragment">
+    tools:context=".InformationsFragment"
+    android:paddingBottom="60dp">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -67,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
+                android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="#FFFFFF"
@@ -84,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
+                android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:textColor="#FFFFFF" />
@@ -100,20 +103,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
+                android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:inputType="phone"
                 android:textColor="#FFFFFF" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="end">
 
                 <Button
                     android:id="@+id/btnAlterarSenha"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="56dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/button_bg"
                     android:backgroundTint="#1EAAF1"
                     android:editable="true"
@@ -136,10 +140,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
+                    android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:textColor="#FFFFFF"
+                    android:textColorHint="#56777777"
                     android:visibility="gone" />
 
                 <EditText
@@ -147,11 +153,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
+                    android:backgroundTint="#FFFFFF"
                     android:ems="10"
                     android:hint="Confirm password"
                     android:inputType="textPassword"
                     android:paddingVertical="10dp"
                     android:textColor="#FFFFFF"
+                    android:textColorHint="#56777777"
                     android:visibility="gone" />
 
                 <Button
@@ -164,7 +172,8 @@
                     android:enabled="false"
                     android:text="Salvar"
                     android:textColor="@color/white"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
+
             </LinearLayout>
 
             <Button
@@ -180,6 +189,7 @@
                 android:text="Salvar Tudo"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

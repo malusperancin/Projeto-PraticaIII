@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="cotuca.aplicativo.viaxar.ui.home.HomeFragment"
+        android:name="cotuca.aplicativo.viaxar.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_explore"
-        android:name="cotuca.aplicativo.viaxar.ui.explore.ExploreFragment"
+        android:name="cotuca.aplicativo.viaxar.ExploreFragment"
         android:label="Explore"
         tools:layout="@layout/fragment_explore" />
 
     <fragment
         android:id="@+id/nav_world"
-        android:name="cotuca.aplicativo.viaxar.ui.world.WorldFragment"
+        android:name="cotuca.aplicativo.viaxar.WorldFragment"
         android:label="World"
         tools:layout="@layout/fragment_world" />
 
     <fragment
         android:id="@+id/nav_fav"
-        android:name="cotuca.aplicativo.viaxar.ui.favorites.FavoritesFragment"
+        android:name="cotuca.aplicativo.viaxar.FavoritesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/nav_info"
-        android:name="cotuca.aplicativo.viaxar.ui.informations.InformationsFragment"
+        android:name="cotuca.aplicativo.viaxar.InformationsFragment"
         android:label="Informations"
         tools:layout="@layout/fragment_informations" />
 
     <fragment
         android:id="@+id/nav_kit"
-        android:name="cotuca.aplicativo.viaxar.ui.travelerkit.TravelerKitFragment"
+        android:name="cotuca.aplicativo.viaxar.TravelerKitFragment"
         android:label="Traveler Kit"
         tools:layout="@layout/fragment_kit" />
 </navigation>

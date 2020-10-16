@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#212121"
     android:orientation="vertical"
-    tools:context=".ui.explore.ExploreFragment">
+    tools:context=".ExploreFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         <TableRow
             android:layout_margin="10dp"
             android:gravity="center"
-            android:textAlignment="viewStart">
+            android:textAlignment="textStart">
 
             <FrameLayout>
 
@@ -108,8 +108,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginVertical="15dp"
             android:gravity="center">
 
             <FrameLayout>
@@ -198,4 +197,5 @@
             </FrameLayout>
         </TableRow>
     </TableLayout>
+
 </LinearLayout>

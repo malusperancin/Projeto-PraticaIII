@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_info"
-        android:name="cotuca.aplicativo.viaxar.ui.informations.InformationsFragment"
+        android:name="cotuca.aplicativo.viaxar.InformationsFragment"
         android:label="Informations"
         tools:layout="@layout/fragment_informations" />
 
     <fragment
         android:id="@+id/nav_fav"
-        android:name="cotuca.aplicativo.viaxar.ui.favorites.FavoritesFragment"
+        android:name="cotuca.aplicativo.viaxar.FavoritesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/nav_kit"
-        android:name="cotuca.aplicativo.viaxar.ui.travelerkit.TravelerKitFragment"
+        android:name="cotuca.aplicativo.viaxar.TravelerKitFragment"
         android:label="Traveler Kit"
         tools:layout="@layout/fragment_kit" />
 
