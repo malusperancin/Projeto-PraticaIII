@@ -144,6 +144,7 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
           capital: res[0].capital,
           continente: res[0].region,
           descricao: result.recordset[i].descricao,
+          foto: result.recordset[i].foto
         });
         console.log(ret[i]);
       }

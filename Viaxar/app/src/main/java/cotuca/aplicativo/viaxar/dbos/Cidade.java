@@ -1,4 +1,4 @@
-package br.aplicativo.apviaxar.dbos;
+package cotuca.aplicativo.viaxar.dbos;
 
 public class Cidade implements Cloneable
 {

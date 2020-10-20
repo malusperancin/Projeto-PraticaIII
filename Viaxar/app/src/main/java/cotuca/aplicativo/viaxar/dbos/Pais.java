@@ -1,9 +1,12 @@
-package br.aplicativo.apviaxar.dbos;
+package cotuca.aplicativo.viaxar.dbos;
+
+import android.graphics.Bitmap;
 
 public class Pais implements Cloneable
 {
     int id, populacao;
-    String nome, bandeira, moeda, idioma, clima, religiao, sigla, capital, continente, descricao;
+    String nome, bandeira, moeda, idioma, clima, religiao, sigla, capital, continente, descricao, foto, DDD;
+    Bitmap imagem, imagemBandeira;
     boolean lgbt;
 
     public int getId() {
@@ -116,6 +119,46 @@ public class Pais implements Cloneable
         this.continente = continente;
     }
 
+    public String getDDD() {
+        return foto;
+    }
+
+    public void setDDD(String ddd) throws Exception {
+        if (ddd.equals("") || ddd == null)
+            throw new Exception("DDD invalido");
+        this.foto = ddd;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String ft) throws Exception {
+        if (ft.equals("") || ft == null)
+            throw new Exception("Nome invalido");
+        this.foto = ft;
+    }
+
+    public Bitmap getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Bitmap img) throws Exception {
+        if (img.equals("") || img == null)
+            throw new Exception("URL inválida");
+        this.imagem = img;
+    }
+
+    public Bitmap getImagemBandeira() {
+        return imagem;
+    }
+
+    public void setImagemBandeira(Bitmap img) throws Exception {
+        if (img.equals("") || img == null)
+            throw new Exception("URL inválida");
+        this.imagem = img;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -132,7 +175,8 @@ public class Pais implements Cloneable
         this.lgbt = lgbt;
     }
 
-    public Pais(int id, int populacao, String nome, String bandeira, String moeda, String idioma, String clima, String religiao, String sigla, String capital, String continente, String descricao, boolean lgbt) throws Exception
+    public Pais(int id, int populacao, String nome, String bandeira, String moeda, String idioma, String clima, String religiao,
+                String sigla, String capital, String continente, String descricao, boolean lgbt, String foto) throws Exception
     {
         setId(id);
         setPopulacao(populacao);
@@ -147,6 +191,7 @@ public class Pais implements Cloneable
         setContinente(continente);
         setDescricao(descricao);
         setLgbt(lgbt);
+        setFoto(foto);
     }
 
     public boolean equals(Object object) {

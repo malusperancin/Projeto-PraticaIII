@@ -9,12 +9,14 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/tvNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="oi" />
+        android:text="Brazil" />
 
     <TextView
+        android:id="@+id/tvDDD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="oi" />
+        android:text="+55" />
 </LinearLayout>
