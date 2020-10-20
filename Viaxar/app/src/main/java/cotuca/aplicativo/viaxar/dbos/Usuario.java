@@ -1,4 +1,4 @@
-package br.aplicativo.apviaxar.dbos;
+package cotuca.aplicativo.viaxar.dbos;
 
 public class Usuario implements Cloneable
 {
@@ -6,7 +6,6 @@ public class Usuario implements Cloneable
 	String email;
 	String senha;
 	String celular;
-	String foto;
 
 	public int getId() {
 		return id;
@@ -48,22 +47,16 @@ public class Usuario implements Cloneable
 		this.celular = celular;
     }
 
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) throws Exception{
-		if(foto.equals("") || foto == null)
-			throw new Exception("foto invalido");
-		this.foto = foto;
-	}
-
-    public Usuario(int id, String email, String senha, String celular, String foto) throws Exception{
+    public Usuario(int id, String email, String senha, String celular) throws Exception{
 		this.setId(id);
 		this.setEmail(email);
 		this.setSenha(senha);
 		this.setCelular(celular);
-		this.setFoto(foto);
+	}
+
+	public Usuario(String email, String senha) throws Exception{
+		this.setEmail(email);
+		this.setSenha(senha);
 	}
 
 	public boolean equals(Object object) {
@@ -82,8 +75,7 @@ public class Usuario implements Cloneable
 		return  this.getId() == usu.getId() &&
 				this.getEmail().equals(usu.getEmail()) &&
 				this.getSenha().equals(usu.getSenha()) &&
-				this.getCelular().equals(usu.getCelular()) &&
-				this.getFoto().equals(usu.getFoto());
+				this.getCelular().equals(usu.getCelular());
 	}
 
 	public int hashCode()
@@ -94,7 +86,6 @@ public class Usuario implements Cloneable
 		ret = 7 * ret + getEmail().hashCode();
 		ret = 7 * ret + getSenha().hashCode();
 		ret = 7 * ret + getCelular().hashCode();
-		ret = 7 * ret + getFoto().hashCode();
 
 		if(ret < 0)
 			ret = -ret;
@@ -109,7 +100,6 @@ public class Usuario implements Cloneable
 				", email= '" + this.email + '\'' +
 				", senha= '" + this.senha + '\'' +
 				", celular= '" + this.celular + '\'' +
-				", foto= " + this.foto +
 				'}';
 	}
 
@@ -122,7 +112,6 @@ public class Usuario implements Cloneable
 		this.email = modelo.email;
 		this.senha = modelo.senha;
 		this.celular = modelo.celular;
-		this.foto = modelo.foto;
 	}
 
 	public Object clone ()

@@ -40,6 +40,37 @@ module.exports = (app) => {
     });
   });
 
+
+  app.post('/api/usuario/post', (requisicao, resposta) => { //ADICIONA USUARIO
+    console.log(requisicao);
+    const senha = requisicao.query.senha;
+    const email = requisicao.query.email;
+    console.log(senha);
+    console.log(email);
+    global.conexao.query("SELECT * from Usuarios WHERE email='" + email + "'", (err, result) => {
+        if (result.recordset[0])
+            resposta.send(result.recordset[0]);
+        else
+            execSQL(`INSERT INTO Usuarios (senha, email) VALUES('${senha}','${email}')`, resposta);
+    });
+});
+
+app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O USUARIO PARA FAZER LOGIN
+  global.conexao.query("SELECT * from Usuarios WHERE email='" + requisicao.params.email + "'", (err, result) => {
+      if (!result.recordset[0])
+          resposta.send(null);
+      else
+      if(requisicao.params.senha == result.recordset[0].senha)
+      {
+         resposta.json(result.recordset[0]);
+      }
+      else
+      resposta.send(null);
+
+         
+  });
+});
+
   app.get("/paises", function (req, res) {
     var req = unirest("GET", "https://restcountries.eu/rest/v2/all");
     req.end(function (res) {
