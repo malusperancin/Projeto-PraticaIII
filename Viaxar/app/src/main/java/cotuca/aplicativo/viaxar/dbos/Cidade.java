@@ -3,7 +3,7 @@ package cotuca.aplicativo.viaxar.dbos;
 public class Cidade implements Cloneable
 {
     int id, codAPI, idPais;
-    String nome, descricao, foto;
+    String nome, descricao, foto,localizacao;
 
     public int getId() {
         return id;
@@ -13,6 +13,16 @@ public class Cidade implements Cloneable
         if(id < 0)
             throw new Exception("Id inválido");
         this.id = id;
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(String localizacao) throws Exception{
+        if(localizacao.equals("") || localizacao == null)
+            throw new Exception("localização inválida");
+        this.localizacao = localizacao;
     }
 
     public int getCodAPI() {

@@ -43,10 +43,8 @@ module.exports = (app) => {
 
   app.post('/api/usuario/post', (requisicao, resposta) => { //ADICIONA USUARIO
     console.log(requisicao);
-    const senha = requisicao.query.senha;
-    const email = requisicao.query.email;
-    console.log(senha);
-    console.log(email);
+    const senha = requisicao.body.senha;
+    const email = requisicao.body.email;
     global.conexao.query("SELECT * from Usuarios WHERE email='" + email + "'", (err, result) => {
         if (result.recordset[0])
             resposta.send(result.recordset[0]);
@@ -60,25 +58,13 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
       if (!result.recordset[0])
           resposta.send(null);
       else
-      if(requisicao.params.senha == result.recordset[0].senha)
-      {
-         resposta.json(result.recordset[0]);
-      }
-      else
-      resposta.send(null);
-
-         
+        if(requisicao.params.senha == result.recordset[0].senha)
+          resposta.json(result.recordset[0]);
+        else
+          resposta.send(null);
   });
 });
 
-  app.get("/paises", function (req, res) {
-    var req = unirest("GET", "https://restcountries.eu/rest/v2/all");
-    req.end(function (res) {
-      if (res.error) throw new Error(res.error);
-
-      console.log(res.body);
-    });
-  });
 
   app.get("/", function (req, res) {
     conexao.query(`select * from Paises`, (err, result) => {
@@ -127,7 +113,6 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
 
         ret.push({
           id: result.recordset[i].id,
-          codAPI: result.recordset[i].codAPI,
           nome: result.recordset[i].nome,
           bandeira: res[0].flag,
           moeda:
@@ -144,7 +129,11 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
           capital: res[0].capital,
           continente: res[0].region,
           descricao: result.recordset[i].descricao,
-          foto: result.recordset[i].foto
+          foto: result.recordset[i].foto,
+          ddd: res[0].callingCodes[0],
+          codAPI: result.recordset[i].codAPI,
+          lat: res[0].latlng[0],
+          lng:  res[0].latlng[1]
         });
         console.log(ret[i]);
       }
@@ -181,8 +170,8 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
             descricao: res.geo_description,
             foto: res.photo.images.original.url,
             idPais: result.recordset[i].idPais,
+            estado: res.location_string
           });
-          console.log(res.photo.images.original.url);
 
           console.log(ret[i]);
         }
@@ -190,7 +179,7 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
     );
   });
 
-  app.get("/cidades/atracoes/:busc", function (req, res) {
+  app.get("/pais/atracoes/:busc", function (req, res) {
     var busc = req.params.busc;
       var res = sync(
         "GET",
@@ -205,15 +194,19 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
           },
         }
       );
-
-      res = JSON.parse(res.body.toString("utf-8")).data[0];
-       //console.log(res);
-   var ret={
-         nome: res.nasme,
-         url: res.booking.url,
-         foto: res.photo.images.original.url,
-       };
-
+       var ret = [];
+       res = JSON.parse(res.body.toString("utf-8"))
+       for(var i=0; i<5; i++)
+       {
+        linha = res.data[i];
+        ret.push({
+           nome: linha.name,
+           url: linha.web_url,
+           foto: linha.photo.images.original.url
+         });
+       }
        console.log(ret);
+       return ret;
   });
+
 };

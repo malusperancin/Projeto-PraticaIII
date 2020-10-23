@@ -3,6 +3,7 @@ package cotuca.aplicativo.viaxar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -17,10 +18,14 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.HashMap;
+
 public class MenuActivity extends AppCompatActivity {
 
+    TextView nome, email;
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawerLayout;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,15 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        nome = findViewById(R.id.nome);
+        email = findViewById(R.id.email);
+
+        HashMap<String, String> user = session.getUserDetail();
+        String mNome = user.get(session.NAME);
+        String mEmail = user.get(session.EMAIL);
+
+        nome.setText(mNome);
+        email.setText(mEmail);
 
          /* BOTTOM NAV */
         BottomNavigationView navView = findViewById(R.id.nav_bottom);

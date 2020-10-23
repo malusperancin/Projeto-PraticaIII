@@ -2,6 +2,7 @@ package cotuca.aplicativo.viaxar;
 
 import java.util.List;
 
+import cotuca.aplicativo.viaxar.dbos.Pais;
 import cotuca.aplicativo.viaxar.dbos.Usuario;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -25,6 +26,6 @@ public interface Service {
     @DELETE("usuario/delete/{ra}")
     Call<Usuario> excluirUsuario(@Path("email") String email);
 
-    /*@GET("api/get")
-    Call<List<U>> selecionaTudo();*/
+    @GET("api/get")
+    Call<List<Pais>> selecionaTudo();
 }

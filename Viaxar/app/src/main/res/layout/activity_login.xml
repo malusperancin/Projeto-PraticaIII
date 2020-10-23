@@ -73,7 +73,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edtEmailCad"
+        android:id="@+id/edtEmail"
         android:layout_width="305dp"
         android:layout_height="59dp"
 

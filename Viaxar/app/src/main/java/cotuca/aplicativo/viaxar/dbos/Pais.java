@@ -5,7 +5,8 @@ import android.graphics.Bitmap;
 public class Pais implements Cloneable
 {
     int id, populacao;
-    String nome, bandeira, moeda, idioma, clima, religiao, sigla, capital, continente, descricao, foto, DDD;
+    float lat, lng;
+    String nome, bandeira, moeda, idioma, clima, religiao, sigla, capital, continente, descricao, foto, ddd;
     Bitmap imagem, imagemBandeira;
     boolean lgbt;
 
@@ -17,6 +18,22 @@ public class Pais implements Cloneable
         if (id < 0)
             throw new Exception("Id inválido");
         this.id = id;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public void setLat(float lat) throws Exception {
+        this.lat = lat;
+    }
+
+    public float getLng() {
+        return lng;
+    }
+
+    public void setLng(float lng) throws Exception {
+        this.lng = lng;
     }
 
     public int getPopulacao() {
@@ -119,14 +136,14 @@ public class Pais implements Cloneable
         this.continente = continente;
     }
 
-    public String getDDD() {
-        return foto;
-    }
+    public String getDdd() {
+    return ddd;
+}
 
-    public void setDDD(String ddd) throws Exception {
+    public void setDdd(String ddd) throws Exception {
         if (ddd.equals("") || ddd == null)
             throw new Exception("DDD invalido");
-        this.foto = ddd;
+        this.ddd = ddd;
     }
 
     public String getFoto() {
@@ -176,7 +193,7 @@ public class Pais implements Cloneable
     }
 
     public Pais(int id, int populacao, String nome, String bandeira, String moeda, String idioma, String clima, String religiao,
-                String sigla, String capital, String continente, String descricao, boolean lgbt, String foto) throws Exception
+                String sigla, String capital, String continente, String descricao, boolean lgbt, String foto, String ddd, float lat, float lng) throws Exception
     {
         setId(id);
         setPopulacao(populacao);
@@ -192,6 +209,9 @@ public class Pais implements Cloneable
         setDescricao(descricao);
         setLgbt(lgbt);
         setFoto(foto);
+        setDdd(ddd);
+        setLat(lat);
+        setLng(lng);
     }
 
     public boolean equals(Object object) {
@@ -207,7 +227,7 @@ public class Pais implements Cloneable
 
         Pais pais = (Pais) object;
 
-        return getId() == pais.getId() &&
+        return  getId() == pais.getId() &&
                 getPopulacao() == pais.getPopulacao() &&
                 isLgbt() == pais.isLgbt() &&
                 getNome().equals(pais.getNome()) &&
@@ -219,7 +239,11 @@ public class Pais implements Cloneable
                 getSigla().equals(pais.getSigla()) &&
                 getCapital().equals(pais.getCapital()) &&
                 getContinente().equals(pais.getContinente()) &&
-                getDescricao().equals(pais.getDescricao());
+                getDescricao().equals(pais.getDescricao()) &&
+                getDdd().equals(pais.getDdd()) &&
+                getFoto().equals(pais.getFoto()) &&
+                getLat() == pais.getLat() &&
+                getLng() == pais.getLng();
     }
 
     public int hashCode() {
@@ -228,6 +252,8 @@ public class Pais implements Cloneable
         ret = 7 * ret + new Integer(getId()).hashCode();
         ret = 7 * ret + new Long(getPopulacao()).hashCode();
         ret = 7 * ret + new Boolean(isLgbt()).hashCode();
+        ret = 7 * ret + new Float(getLat()).hashCode();
+        ret = 7 * ret + new Float(getLng()).hashCode();
         ret = 7 * ret + getNome().hashCode();
         ret = 7 * ret + getBandeira().hashCode();
         ret = 7 * ret + getMoeda().hashCode();
@@ -260,7 +286,10 @@ public class Pais implements Cloneable
                 ", capital='" + capital + '\'' +
                 ", continente='" + continente + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", lgbt=" + lgbt +
+                ", foto=" + foto + '\'' +
+                ", ddd=" + ddd + '\'' +
+                ", lat=" + lat + '\'' +
+                ", lng=" + lng +
                 '}';
     }
 
@@ -281,6 +310,10 @@ public class Pais implements Cloneable
         this.continente = modelo.continente;
         this.descricao = modelo.descricao;
         this.lgbt = modelo.lgbt;
+        this.foto = modelo.foto;
+        this.lat = modelo.lat;
+        this.lng = modelo.lng;
+        this.ddd = modelo.ddd;
     }
 
     public Object clone ()

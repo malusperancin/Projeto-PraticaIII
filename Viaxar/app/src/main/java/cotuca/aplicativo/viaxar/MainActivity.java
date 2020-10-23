@@ -10,12 +10,16 @@ import cotuca.aplicativo.viaxar.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    SessionManager session;
     Button btnTelaLogin, btnTelaCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
 
         btnTelaLogin = findViewById(R.id.btnTelaLogin);
         btnTelaCadastro = findViewById(R.id.btnTelaCadastro);

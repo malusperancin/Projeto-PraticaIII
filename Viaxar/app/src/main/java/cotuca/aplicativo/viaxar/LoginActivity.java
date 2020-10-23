@@ -22,16 +22,19 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvTelaCadastro;
     Button btnLogin;
     EditText edtEmail, edtSenha;
+    SessionManager session;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        session = new SessionManager(this);
+
         tvTelaCadastro = findViewById(R.id.tvCadastro);
         btnLogin = (Button)findViewById(R.id.btnLogin);
-        edtEmail = findViewById(R.id.edtEmailCad);
-        edtSenha = findViewById(R.id.edtSenhaCad);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtSenha = findViewById(R.id.edtSenha);
 
         tvTelaCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,10 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-                finish();
-               // login(edtEmail.getText().toString(), edtSenha.getText().toString());
+                login(edtEmail.getText().toString(), edtSenha.getText().toString());
+                //Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                //startActivity(intent);
+                //finish();
+
             }
         });
     }
@@ -68,13 +72,14 @@ public class LoginActivity extends AppCompatActivity {
                     Usuario usuario = response.body();
 
                     if (usuario != null) {
+                        //session.createSession(usuario.getEmail(), usuario.getId() + "");
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
                         finish();
-                        //coisa a sessao
-                    } else
+                    }
+                    else
                     {
-                        Toast.makeText(getApplicationContext(), "Conta n enconytrada ou senha errada", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Conta n encontrada ou senha errada", Toast.LENGTH_LONG).show();
                     }
                 }
                 else

@@ -50,7 +50,7 @@ public class PaisTravelerAdapter extends ArrayAdapter<Pais> {
 
         Pais pais = dados.get(position);
         tvNome.setText(pais.getNome());
-        tvDDD.setText(pais.getDDD());
+        tvDDD.setText(pais.getDdd());
 
         return view;
     }
