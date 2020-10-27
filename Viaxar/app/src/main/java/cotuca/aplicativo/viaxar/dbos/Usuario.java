@@ -7,6 +7,11 @@ public class Usuario implements Cloneable
 	String senha;
 	String celular;
 
+	public String getNome()
+	{
+		return getEmail().substring(0,email.indexOf("@"));
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -17,13 +22,13 @@ public class Usuario implements Cloneable
 		this.id = id;
     }
 
-	public String getEmail() {
+    public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) throws Exception{
 		if(email.equals("") || email == null)
-			throw new Exception("email invalido");
+			throw new Exception("Email invalido");
 		this.email = email;
 	}
 
@@ -33,7 +38,7 @@ public class Usuario implements Cloneable
 
 	public void setSenha(String senha) throws Exception{
 		if(senha.equals("") || senha == null)
-			throw new Exception("senha inválida");
+			throw new Exception("Senha inválida");
 		this.senha = senha;
 	}
 
@@ -41,9 +46,7 @@ public class Usuario implements Cloneable
 		return celular;
 	}
 
-	public void setCelular(String celular) throws Exception{
-		if(celular.equals("") || celular == null)
-			throw new Exception("celular invalido");
+	public void setCelular(String celular) {
 		this.celular = celular;
     }
 
@@ -51,6 +54,12 @@ public class Usuario implements Cloneable
 		this.setId(id);
 		this.setEmail(email);
 		this.setSenha(senha);
+		this.setCelular(celular);
+	}
+
+	public Usuario(int id, String email,String celular) throws Exception{
+		this.setId(id);
+		this.setEmail(email);
 		this.setCelular(celular);
 	}
 

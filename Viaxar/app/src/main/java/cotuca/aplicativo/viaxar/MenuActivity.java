@@ -3,6 +3,7 @@ package cotuca.aplicativo.viaxar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,24 +21,31 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.util.HashMap;
 
+import cotuca.aplicativo.viaxar.dbos.Usuario;
+
 public class MenuActivity extends AppCompatActivity {
 
     TextView nome, email;
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawerLayout;
+    private int id= 1;
+    private Usuario usuario;
     SessionManager session;
-
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
+
+        session = new SessionManager(this);
+        session.checkLogin();
 
         /*SIDE NAV*/
         Toolbar toolbar = findViewById(R.id.tb_titulo);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-       NavigationView navigationView = findViewById(R.id.side_nav_menu);
+        navigationView = findViewById(R.id.side_nav_menu);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -47,16 +55,14 @@ public class MenuActivity extends AppCompatActivity {
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        nome = findViewById(R.id.nome);
-        email = findViewById(R.id.email);
-
-        HashMap<String, String> user = session.getUserDetail();
-        String mNome = user.get(session.NAME);
-        String mEmail = user.get(session.EMAIL);
-
-        nome.setText(mNome);
-        email.setText(mEmail);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == R.id.nav_exit)
+                session.logout();
+                return NavigationUI.onNavDestinationSelected(item, navController);
+            }
+        });
 
          /* BOTTOM NAV */
         BottomNavigationView navView = findViewById(R.id.nav_bottom);
@@ -77,7 +83,22 @@ public class MenuActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        HashMap<String, String> user = session.getUserDetail();
+        try {
+            usuario = new Usuario(Integer.parseInt(user.get(session.ID)), user.get(session.EMAIL) ,user.get(session.CELULAR));
+        }
+        catch(Exception ex){}
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView nome = (TextView) headerView.findViewById(R.id.nome);
+        TextView email = (TextView) headerView.findViewById(R.id.email);
+        nome.setText(usuario.getNome());
+        email.setText(usuario.getEmail());
     }
 
     @Override

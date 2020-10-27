@@ -39,52 +39,53 @@
         app:layout_constraintVertical_bias="0.177" />
 
     <Button
-        android:id="@+id/btnTelaCadastro"
+        android:id="@+id/btnTelaLogin"
         android:layout_width="203dp"
         android:layout_height="49dp"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="152dp"
         android:background="@drawable/button_lg"
         android:backgroundTint="#1EAAF1"
-        android:enabled="true"
-        android:text="SIGN UP"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btnTelaLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnTelaLogin"
-        android:layout_width="200dp"
-        android:layout_height="52dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/button_bg"
-        android:backgroundTint="@color/cinzaToolbar"
         android:enabled="true"
         android:text="SIGN IN"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chkTermos"
         app:layout_constraintVertical_bias="0.35" />
+
+    <Button
+        android:id="@+id/btnTelaCadastro"
+        android:layout_width="203dp"
+        android:layout_height="49dp"
+        android:layout_gravity="start"
+        android:background="@drawable/button_bg"
+        android:backgroundTint="@color/cinzaToolbar"
+        android:enabled="true"
+        android:text="SIGN UP"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.797" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="288dp"
         android:layout_height="166dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnTelaCadastro"
+        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnTelaLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.553"
+        app:layout_constraintVertical_bias="0.197"
         app:srcCompat="@drawable/logocinzaclaro" />
 
     <!--<ImageView

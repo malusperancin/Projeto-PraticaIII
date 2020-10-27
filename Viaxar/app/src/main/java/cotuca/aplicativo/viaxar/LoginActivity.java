@@ -48,10 +48,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 login(edtEmail.getText().toString(), edtSenha.getText().toString());
-                //Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                //startActivity(intent);
-                //finish();
-
             }
         });
     }
@@ -70,9 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Response<Usuario> response, Retrofit retrofit) {
                 if(response.isSuccess()) {
                     Usuario usuario = response.body();
-
                     if (usuario != null) {
-                        //session.createSession(usuario.getEmail(), usuario.getId() + "");
+                        session.createSession(usuario.getId() ,usuario.getEmail(), usuario.getCelular()) ;
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
                         finish();

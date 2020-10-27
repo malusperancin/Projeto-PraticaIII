@@ -80,7 +80,7 @@
                 android:textColor="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
@@ -96,7 +96,7 @@
                 android:textColor="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextPhone"
+                android:id="@+id/edtCell"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"

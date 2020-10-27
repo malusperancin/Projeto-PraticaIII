@@ -17,6 +17,7 @@ public class SessionManager {
     private static final String LOGIN = "IS_LOGIN";
     public static final String NAME = "NAME";
     public static final String EMAIL = "EMAIL";
+    public static final String CELULAR = "CELULAR";
     public static final String ID = "ID";
 
     public SessionManager(Context context) {
@@ -25,11 +26,12 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void createSession(String email, String id){
+    public void createSession(int id,String email,String celular){
         editor.putBoolean(LOGIN, true);
         editor.putString(NAME, email.substring(0,email.indexOf("@")));
         editor.putString(EMAIL, email);
-        editor.putString(ID, id);
+        editor.putInt(ID, id);
+        editor.putString(CELULAR,celular);
         editor.apply();
     }
 
@@ -39,22 +41,24 @@ public class SessionManager {
 
     public void checkLogin(){
 
-        if (this.isLoggin()){
-            Intent i = new Intent(context, MenuActivity.class);
+        if (!this.isLoggin()){
+            Intent i = new Intent(context, MainActivity.class);
             context.startActivity(i);
-            ((MainActivity)context).finish();
+            ((MenuActivity)context).finish();
         }
     }
 
     public HashMap<String, String> getUserDetail(){
 
         HashMap<String, String> user = new HashMap<>();
+        user.put(ID, sharedPreferences.getInt(ID, 0) + "");
         user.put(NAME, sharedPreferences.getString(NAME, null));
         user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
-        user.put(ID, sharedPreferences.getString(ID, null));
+        user.put(CELULAR, sharedPreferences.getString(CELULAR, null));
 
         return user;
     }
+
 
     public void logout(){
 

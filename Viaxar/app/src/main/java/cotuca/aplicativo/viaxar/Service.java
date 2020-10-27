@@ -20,8 +20,11 @@ public interface Service {
     @GET("usuario/login/{email}/{senha}")
     Call<Usuario> login(@Path("email") String email,@Path("senha") String senha);
 
-    @PUT("usuario/put/{email}")
-    Call<Usuario> alterarUsuario(@Path("email") String email, @Body Usuario usuario);
+    @PUT("usuario/editarSenha/{senhaOld}/{senhaNew}")
+    Call<Usuario> alterarSenha(@Body Usuario usuario, @Path("senhaOld") String senhaOld,@Path("senhaNew") String senhaNew);
+
+    @PUT("usuario/put")
+    Call<Usuario> alterarUsuario(@Body Usuario usuario);
 
     @DELETE("usuario/delete/{ra}")
     Call<Usuario> excluirUsuario(@Path("email") String email);

@@ -57,24 +57,6 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="#FFFFFF" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:backgroundTint="#FFFFFF"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
-
-            <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +64,7 @@
                 android:textColor="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
@@ -95,17 +77,17 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Number"
+                android:text="Cellphone Number"
                 android:textColor="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextPhone"
+                android:id="@+id/edtCell"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
-                android:inputType="phone"
+                android:inputType="text"
                 android:textColor="#FFFFFF" />
 
             <LinearLayout
@@ -123,7 +105,7 @@
                     android:editable="true"
                     android:enabled="true"
                     android:fadeScrollbars="false"
-                    android:text="Trocar Senha"
+                    android:text="Change password"
                     android:textColor="@color/cinzaexplorar" />
 
             </LinearLayout>
@@ -136,13 +118,26 @@
 
 
                 <EditText
+                    android:id="@+id/edtOld"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="7dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:ems="10"
+                    android:hint="Current password"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#56777777"
+                    android:visibility="gone" />
+
+                <EditText
                     android:id="@+id/edtPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
-                    android:hint="Password"
+                    android:hint="New password"
                     android:inputType="textPassword"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#56777777"
@@ -155,7 +150,7 @@
                     android:layout_margin="7dp"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
-                    android:hint="Confirm password"
+                    android:hint="Confirm new password"
                     android:inputType="textPassword"
                     android:paddingVertical="10dp"
                     android:textColor="#FFFFFF"
@@ -169,7 +164,7 @@
                     android:layout_gravity="end"
                     android:background="@drawable/button_lg"
                     android:backgroundTint="@color/cinzaToolbar"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:text="Salvar"
                     android:textColor="@color/white"
                     android:visibility="gone" />
@@ -185,8 +180,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_lg"
                 android:backgroundTint="#1EAAF1"
-                android:enabled="false"
-                android:text="Salvar Tudo"
+                android:enabled="true"
+                android:text="Save all"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 

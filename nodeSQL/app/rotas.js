@@ -65,6 +65,40 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
   });
 });
 
+app.put('/api/usuario/put', function (req, resp) { //envia as novas informacoes do pessoa para o banco
+  const usuario = req.body;
+  const email = usuario.email;
+  const celular = usuario.celular;
+  console.log(email);
+  console.log(celular);
+  console.log(usuario.id);
+
+  conexao.query(`SELECT * FROM Usuarios where email = '${email}'`, (err, result) => {
+    if (result.body == undefined)
+      execSQL(`update Usuarios set email='${email}', celular='${celular}' where id=${usuario.id}`, resp);
+    else
+      if(result.body.id == usuario.id)
+        execSQL(`update Usuarios set celular='${celular}' where id = '${usuario.id}'`, resp);
+      else
+        resp.send("Erro");
+    
+  });
+});
+
+app.put('/api/usuario/editarSenha/:senhaOld/:senhaNew', function (req, resp) { //envia as novas informacoes do pessoa para o banco
+  const usuarioId = req.body.id;
+  const senhaOld = req.params.senhaOld;
+  const senhaNew = req.params.senhaNew;
+
+  conexao.query(`SELECT * FROM Usuarios where id = ${usuarioId}`, (err, result) => {
+    console.log(result.recordset[0].senha);
+      if(result.recordset[0].senha == senhaOld)
+        execSQL(`update Usuarios set senha='${senhaNew}' where id = '${usuarioId}'`, resp);
+      else
+        resp.send("Erro");
+  });
+});
+
 
   app.get("/", function (req, res) {
     conexao.query(`select * from Paises`, (err, result) => {
@@ -209,4 +243,4 @@ app.get('/api/usuario/login/:email/:senha', (requisicao, resposta) => { //PEGA O
        return ret;
   });
 
-};
+}
