@@ -29,6 +29,12 @@ public interface Service {
     @DELETE("usuario/delete/{ra}")
     Call<Usuario> excluirUsuario(@Path("email") String email);
 
-    @GET("api/get")
-    Call<List<Pais>> selecionaTudo();
+   // @GET("get")
+    //Call<List<Pais>> getPaises();
+
+    @GET("paises/favoritos/{id}")
+    Call<List<Pais>> selecionarFavs(@Path("id") int id);
+
+    @GET("paises/continente/{continente}")
+    Call<List<Pais>> selecionarPaisesContinente(@Path("continente") String continente);
 }

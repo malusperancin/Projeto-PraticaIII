@@ -45,7 +45,7 @@ public class PaisTravelerAdapter extends ArrayAdapter<Pais> {
             view = layoutinflater.inflate(layoutResourceId,parent,false);
         }
 
-        TextView tvNome = (TextView) view.findViewById(R.id.tvPais);
+        TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvDDD = (TextView) view.findViewById(R.id.tvContinente);
 
         Pais pais = dados.get(position);

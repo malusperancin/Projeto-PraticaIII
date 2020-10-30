@@ -1,6 +1,10 @@
 package cotuca.aplicativo.viaxar.dbos;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.InputStream;
+import java.net.URL;
 
 public class Pais implements Cloneable
 {
@@ -54,16 +58,6 @@ public class Pais implements Cloneable
         if (nome.equals("") || nome == null)
             throw new Exception("Nome invalido");
         this.nome = nome;
-    }
-
-    public String getBandeira() {
-        return bandeira;
-    }
-
-    public void setBandeira(String bandeira) throws Exception{
-        if (bandeira.equals("") || bandeira == null)
-            throw new Exception("Bandeira invalida");
-        this.bandeira = bandeira;
     }
 
     public String getMoeda() {
@@ -146,6 +140,17 @@ public class Pais implements Cloneable
         this.ddd = ddd;
     }
 
+    public String getBandeira() {
+        return bandeira;
+    }
+
+    public void setBandeira(String bandeira) throws Exception{
+        if (bandeira.equals("") || bandeira == null)
+            throw new Exception("Bandeira invalida");
+
+        this.setImagemBandeira(bandeira);
+    }
+
     public String getFoto() {
         return foto;
     }
@@ -153,27 +158,35 @@ public class Pais implements Cloneable
     public void setFoto(String ft) throws Exception {
         if (ft.equals("") || ft == null)
             throw new Exception("Nome invalido");
-        this.foto = ft;
+        this.setImagem(ft);
     }
 
     public Bitmap getImagem() {
         return imagem;
     }
 
-    public void setImagem(Bitmap img) throws Exception {
-        if (img.equals("") || img == null)
+    public void setImagem(String url) throws Exception {
+        if (url.equals("") || url == null)
             throw new Exception("URL inválida");
-        this.imagem = img;
+
+        InputStream inputStream = (InputStream) new URL(url).getContent();
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        this.imagem = bitmap;
+        inputStream.close();
     }
 
     public Bitmap getImagemBandeira() {
         return imagem;
     }
 
-    public void setImagemBandeira(Bitmap img) throws Exception {
-        if (img.equals("") || img == null)
+    public void setImagemBandeira(String url) throws Exception {
+        if (url.equals("") || url == null)
             throw new Exception("URL inválida");
-        this.imagem = img;
+
+        InputStream inputStream = (InputStream) new URL(url).getContent();
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        this.imagemBandeira = bitmap;
+        inputStream.close();
     }
 
     public String getDescricao() {

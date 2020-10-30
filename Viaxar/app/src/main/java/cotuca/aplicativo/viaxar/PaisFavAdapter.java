@@ -47,14 +47,14 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
         TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
-        TextView tvIdioma = (TextView) view.findViewById(R.id.tvIdioma);
+        TextView tvLingua = (TextView) view.findViewById(R.id.tvLingua);
 
         Pais pais = dados.get(position);
         imgPais.setImageBitmap(pais.getImagem());
         imgBandeira.setImageBitmap(pais.getImagemBandeira());
         tvNome.setText(pais.getNome());
-        tvContinente.setText(pais.getCapital());
-        tvIdioma.setText(pais.getIdioma());
+        tvContinente.setText(pais.getContinente());
+        tvLingua.setText(pais.getIdioma());
 
         return view;
     }
