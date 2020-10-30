@@ -7,17 +7,26 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 
 import cotuca.aplicativo.viaxar.dbos.Pais;
+import cotuca.aplicativo.viaxar.dbos.Usuario;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
+
 public class PaisFavAdapter extends ArrayAdapter<Pais> {
     Context context;
     int layoutResourceId;
     List<Pais> dados;
+    View view;
 
     public PaisFavAdapter (@NonNull Context context, int resource, @NonNull List<Pais> dados) {
         super(context, resource, dados);
@@ -34,9 +43,9 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
 
-        View view = convertView;
+        view = convertView;
 
         if(view == null) {
             LayoutInflater layoutinflater = LayoutInflater.from(context);
@@ -49,13 +58,55 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
         TextView tvLingua = (TextView) view.findViewById(R.id.tvLingua);
 
-        Pais pais = dados.get(position);
+        final Pais pais = dados.get(position);
+        try{
+            //pais.setImagem(pais.getFoto());
+            pais.setImagemBandeira(pais.getBandeira());
+        }
+        catch (Exception ex){ex.printStackTrace();}
+
         imgPais.setImageBitmap(pais.getImagem());
         imgBandeira.setImageBitmap(pais.getImagemBandeira());
         tvNome.setText(pais.getNome());
         tvContinente.setText(pais.getContinente());
         tvLingua.setText(pais.getIdioma());
 
+        ImageView fav = (ImageView) view.findViewById(R.id.imgCoracaoVermelho);
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SessionManager session = new SessionManager(getContext());
+                HashMap<String, String>  user = session.getUserDetail();
+                Call<Usuario> call = new RetrofitConfig().getService().excluirFavorito(Integer.parseInt(user.get(session.ID)),pais.getId());
+                call.enqueue(new Callback<Usuario>() {
+                    @Override
+                    public void onResponse(Response<Usuario> response, Retrofit retrofit) {
+                        if(response.isSuccess()) //conectou com o node
+                        {
+                            Toast.makeText(getContext(), "uhul foi", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(getContext(), "Ocorreu um erro ao excluir o pais fav", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast.makeText(getContext(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                    }
+                });
+                //atualizar
+                //parent.getChildAt(position)
+
+                dados.remove(position);
+                view.notify();
+            }
+
+
+        });
+
         return view;
     }
+
+
+
 }

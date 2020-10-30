@@ -3,8 +3,12 @@ package cotuca.aplicativo.viaxar.dbos;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
+
+import retrofit.http.Url;
 
 public class Pais implements Cloneable
 {
@@ -147,7 +151,7 @@ public class Pais implements Cloneable
     public void setBandeira(String bandeira) throws Exception{
         if (bandeira.equals("") || bandeira == null)
             throw new Exception("Bandeira invalida");
-
+        this.bandeira = bandeira;
         this.setImagemBandeira(bandeira);
     }
 
@@ -158,6 +162,7 @@ public class Pais implements Cloneable
     public void setFoto(String ft) throws Exception {
         if (ft.equals("") || ft == null)
             throw new Exception("Nome invalido");
+        this.foto =ft;
         this.setImagem(ft);
     }
 
@@ -168,11 +173,8 @@ public class Pais implements Cloneable
     public void setImagem(String url) throws Exception {
         if (url.equals("") || url == null)
             throw new Exception("URL inválida");
+        this.imagem = getBitmapFromURL(url);
 
-        InputStream inputStream = (InputStream) new URL(url).getContent();
-        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-        this.imagem = bitmap;
-        inputStream.close();
     }
 
     public Bitmap getImagemBandeira() {
@@ -182,11 +184,22 @@ public class Pais implements Cloneable
     public void setImagemBandeira(String url) throws Exception {
         if (url.equals("") || url == null)
             throw new Exception("URL inválida");
+        this.imagemBandeira = getBitmapFromURL(url);
+    }
 
-        InputStream inputStream = (InputStream) new URL(url).getContent();
-        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-        this.imagemBandeira = bitmap;
-        inputStream.close();
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getDescricao() {

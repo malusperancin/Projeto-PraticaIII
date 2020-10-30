@@ -37,4 +37,7 @@ public interface Service {
 
     @GET("paises/continente/{continente}")
     Call<List<Pais>> selecionarPaisesContinente(@Path("continente") String continente);
+
+    @DELETE("usuario/desfavoritar/{idUsuario}/{idPais}")
+    Call<Usuario> excluirFavorito(@Path("idUsuario") int idUsuario, @Path("idPais") int idPais);
 }
