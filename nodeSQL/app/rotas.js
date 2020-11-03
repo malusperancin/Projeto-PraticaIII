@@ -42,7 +42,7 @@ module.exports = (app) => {
 
 
     app.post('/api/usuario/post', (requisicao, resposta) => { //ADICIONA USUARIO
-        console.log(requisicao);
+       // console.log(requisicao);
         const senha = requisicao.body.senha;
         const email = requisicao.body.email;
         global.conexao.query("SELECT * from Usuarios WHERE email='" + email + "'", (err, result) => {
@@ -70,9 +70,9 @@ module.exports = (app) => {
         const email = usuario.email;
         const celular = usuario.celular;
 
-        console.log(email);
-        console.log(celular);
-        console.log(usuario.id);
+        //console.log(email);
+        //console.log(celular);
+        //console.log(usuario.id);
 
         conexao.query(`SELECT * FROM Usuarios where email = '${email}'`, (err, result) => {
             if (result.body == undefined)
@@ -92,7 +92,7 @@ module.exports = (app) => {
         const senhaNew = req.params.senhaNew;
 
         conexao.query(`SELECT * FROM Usuarios where id = ${usuarioId}`, (err, result) => {
-            console.log(result.recordset[0].senha);
+            //console.log(result.recordset[0].senha);
             if (result.recordset[0].senha == senhaOld)
                 execSQL(`update Usuarios set senha='${senhaNew}' where id = '${usuarioId}'`, resp);
             else
@@ -202,6 +202,46 @@ module.exports = (app) => {
         res.send(ret);
     });
 
+    app.get("/api/paises/:id", function(req, resp) {
+      conexao.query(`select * from paises where id = ${req.params.id}`, (err, result) => {
+          var res = sync(
+              "GET",
+              "https://restcountries.eu/rest/v2/name/" +
+              result.recordset[0].nome.toLowerCase()
+          );
+
+          res = JSON.parse(res.body.toString("utf-8"));
+
+          ret = [{
+              id: result.recordset[0].id,
+              nome: result.recordset[0].nome,
+              bandeira: res[0].flag,
+              moeda: res[0].currencies[0].name +
+                  " (" +
+                  res[0].currencies[0].symbol +
+                  ")",
+              idioma: res[0].languages[0].name,
+              populacao: res[0].population,
+              clima: result.recordset[0].clima,
+              religiao: result.recordset[0].religiao,
+              lgbt: result.recordset[0].lgbt,
+              sigla: res[0].alpha3Code,
+              capital: res[0].capital,
+              continente: res[0].region,
+              descricao: result.recordset[0].descricao,
+              foto: result.recordset[0].foto,
+              ddd: res[0].callingCodes[0],
+              codAPI: result.recordset[0].codAPI,
+              lat: res[0].latlng[0],
+              lng: res[0].latlng[0]
+          }];
+
+         // console.log(ret);
+
+          resp.send(ret);
+      });
+  });
+
     app.get("/api/cidades/pais/:busc", function(req, res) {
         var busc = req.params.busc;
         conexao.query(
@@ -233,7 +273,7 @@ module.exports = (app) => {
                         estado: res.location_string
                     });
 
-                    console.log(ret[i]);
+                    //console.log(ret[i]);
                 }
             }
         );
@@ -262,7 +302,7 @@ module.exports = (app) => {
                 foto: linha.photo.images.original.url
             });
         }
-        console.log(ret);
+      //  console.log(ret);
         return ret;
     });
 
@@ -290,50 +330,80 @@ module.exports = (app) => {
                 foto: linha.photo.images.original.url
             });
         }
-        console.log(ret);
+        //console.log(ret);
         return ret;
     });
 
     app.get("/api/paises/continente/:nome", function(req, resp) {
-        var res = sync(
-            "GET",
-            "https://restcountries.eu/rest/v2/region/" +
-            req.params.nome
-        );
-        var paises = JSON.parse(res.body.toString("utf-8"));
-
+      var cont = req.params.nome.substring(0, 2).toUpperCase(); 
+      var continente = req.params.nome;
+      conexao.query(`select * from paises where continente ='${cont}'`, (err, result) => {
         var ret = [];
 
         for (var i = 0; i < result.recordset.length; i++) {
-            conexao.query(`select * from paises where nome = ${paises[i].nome}`, (err, result) => {
+            var res = sync(
+                "GET",
+                "https://restcountries.eu/rest/v2/name/" +
+                result.recordset[i].nome
+            );
 
+            res = JSON.parse(res.body.toString("utf-8"));
 
-                ret.push({
-                    id: result.recordset[0].id,
-                    nome: result.recordset[0].nome,
-                    bandeira: pais[i].flag,
-                    moeda: pais[i].currencies[0].name +
-                        " (" +
-                        pais[i].currencies[0].symbol +
-                        ")",
-                    idioma: pais[i].languages[0].name,
-                    populacao: pais[i].population,
-                    clima: result.recordset[0].clima,
-                    religiao: result.recordset[0].religiao,
-                    lgbt: result.recordset[0].lgbt,
-                    sigla: pais[i].alpha3Code,
-                    capital: pais[i].capital,
-                    continente: pais[i].region,
-                    descricao: result.recordset[0].descricao,
-                    foto: result.recordset[0].foto,
-                    ddd: pais[i].callingCodes[0],
-                    codAPI: result.recordset[0].codAPI,
-                    lat: pais[i].latlng[0],
-                    lng: pais[i].latlng[1]
-                });
+            ret.push({
+                id: result.recordset[i].id,
+                nome: result.recordset[i].nome,
+                bandeira: res[0].flag,
+                moeda: res[0].currencies[0].name +
+                    " (" +
+                    res[0].currencies[0].symbol +
+                    ")",
+                idioma: res[0].languages[0].name,
+                populacao: res[0].population,
+                clima: result.recordset[i].clima,
+                religiao: result.recordset[i].religiao,
+                lgbt: result.recordset[i].lgbt,
+                sigla: res[0].alpha3Code,
+                capital: res[0].capital,
+                continente: res[0].region,
+                descricao: result.recordset[i].descricao,
+                foto: result.recordset[i].foto,
+                ddd: res[0].callingCodes[0],
+                codAPI: result.recordset[i].codAPI,
+                lat: res[0].latlng[0],
+                lng: res[0].latlng[1]
             });
-        };
-
+        }
         resp.send(ret);
     });
-}
+  });
+
+  app.delete('/api/usuario/desfavoritar/:idUsuario/:idPais', (requisicao, resposta) => { 
+    const idUsuario = requisicao.params.idUsuario;
+    const idPais = requisicao.params.idPais;
+    execSQL(`delete from Favoritos where idUsuario = ${idUsuario} and idPais = ${idPais}`, resposta);
+});
+
+app.get("/api/paises/favoritos/checar/:idPais/:idUsuario", function(req, resp) {
+    const idUsuario = req.params.idUsuario;
+    const idPais = req.params.idPais;
+    console.log(idUsuario);
+    console.log(idPais);
+    conexao.query(`select * from favoritos where idUsuario =${idUsuario} and idPais = ${idPais}`, (err, result) => {
+        if(result.rowsAffected[0] == 1)
+        {
+            console.log("deu true");
+             resp.send(true);
+        }
+        else 
+            resp.send(false);
+  });
+});
+
+app.post('/api/usuario/favoritar/:idUsuario/:idPais', (requisicao, resposta) => { 
+    const idUsuario = requisicao.params.idUsuario;
+    const idPais = requisicao.params.idPais;
+    execSQL(`insert into Favoritos values(${idUsuario}, ${idPais})`, resposta);
+});
+
+  }
+   

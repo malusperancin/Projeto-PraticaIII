@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,33 +28,56 @@ public class PaisesActivity extends AppCompatActivity {
 
     List<Pais> listaPais;
     ListView lvPais;
+    GridView gvPais;
     SessionManager session;
     HashMap<String, String> user;
     String continente;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-        session = new SessionManager(this);
-        listaPais = new ArrayList<Pais>();
-        lvPais = (ListView) root.findViewById(R.id.listaPaises);
-        consultarPaisesFavoritos();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_paises);
 
         Intent intent = getIntent();
         Bundle params = intent.getExtras();
-
         continente = params.getString("continente");
 
-        return root;
+        session = new SessionManager(this);
+        listaPais = new ArrayList<Pais>();
+        gvPais = (GridView) findViewById(R.id.listaPaises);
+        gvPais.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), PaisActivity.class);
+                Bundle params = new Bundle();
+
+                Pais pais = (Pais) adapterView.getItemAtPosition(i);
+
+                params.putInt ("idPais", pais.getId());
+
+                intent.putExtras(params);
+
+                startActivity(intent);
+            }
+        });
+
+        ImageView back = (ImageView) findViewById(R.id.imgBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        consultarPaisesContinente();
     }
 
     protected void atualizarView(){
-        PaisFavAdapter adapter = new PaisFavAdapter(this, R.layout.pais_fav, listaPais);
-        lvPais.setAdapter(adapter);
+        PaisContinenteItemAdapter adapter = new PaisContinenteItemAdapter(this, R.layout.pais_continente_item, listaPais);
+        gvPais.setAdapter(adapter);
     }
 
-    public void consultarPaisesFavoritos(){
+    public void consultarPaisesContinente(){
         // Classe Call é usada p/ executar a solicitação à API
         user = session.getUserDetail();
         Call<List<Pais>> call = new RetrofitConfig().getService().selecionarPaisesContinente(continente);

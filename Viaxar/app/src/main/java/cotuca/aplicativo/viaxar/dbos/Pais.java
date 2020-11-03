@@ -152,7 +152,7 @@ public class Pais implements Cloneable
         if (bandeira.equals("") || bandeira == null)
             throw new Exception("Bandeira invalida");
         this.bandeira = bandeira;
-        this.setImagemBandeira(bandeira);
+        //this.setImagemBandeira(bandeira);
     }
 
     public String getFoto() {
@@ -163,17 +163,17 @@ public class Pais implements Cloneable
         if (ft.equals("") || ft == null)
             throw new Exception("Nome invalido");
         this.foto =ft;
-        this.setImagem(ft);
+        //this.setImagem(ft);
     }
 
     public Bitmap getImagem() {
         return imagem;
     }
 
-    public void setImagem(String url) throws Exception {
-        if (url.equals("") || url == null)
+    public void setImagem(Bitmap img) throws Exception {
+        if (img.equals("") || img == null)
             throw new Exception("URL inválida");
-        this.imagem = getBitmapFromURL(url);
+        this.imagem = img;
 
     }
 
@@ -181,10 +181,11 @@ public class Pais implements Cloneable
         return imagem;
     }
 
-    public void setImagemBandeira(String url) throws Exception {
-        if (url.equals("") || url == null)
+    public void setImagemBandeira(Bitmap img) throws Exception {
+        if (img.equals("") || img == null)
             throw new Exception("URL inválida");
-        this.imagemBandeira = getBitmapFromURL(url);
+        //this.imagemBandeira = getBitmapFromURL(url);
+        this.imagemBandeira = img;
     }
 
     public static Bitmap getBitmapFromURL(String src) {

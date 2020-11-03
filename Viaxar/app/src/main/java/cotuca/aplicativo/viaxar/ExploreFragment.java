@@ -31,7 +31,7 @@ public class ExploreFragment extends Fragment {
         btnAfrica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PaisActivity.class);
+                Intent intent = new Intent(getActivity(), PaisesActivity.class);
                 Bundle params = new Bundle();
 
                 params.putString("continente", "Africa");
@@ -45,7 +45,7 @@ public class ExploreFragment extends Fragment {
         btnAmerica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PaisActivity.class);
+                Intent intent = new Intent(getActivity(), PaisesActivity.class);
                 Bundle params = new Bundle();
 
                 params.putString("continente", "America");
@@ -59,7 +59,7 @@ public class ExploreFragment extends Fragment {
         btnAsia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PaisActivity.class);
+                Intent intent = new Intent(getActivity(), PaisesActivity.class);
                 Bundle params = new Bundle();
 
                 params.putString("continente", "Asia");
@@ -73,7 +73,7 @@ public class ExploreFragment extends Fragment {
         btnEuropa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PaisActivity.class);
+                Intent intent = new Intent(getActivity(), PaisesActivity.class);
                 Bundle params = new Bundle();
 
                 params.putString("continente", "Europe");
@@ -86,7 +86,7 @@ public class ExploreFragment extends Fragment {
         btnOceania.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PaisActivity.class);
+                Intent intent = new Intent(getActivity(), PaisesActivity.class);
                 Bundle params = new Bundle();
 
                 params.putString("continente", "Oceania");

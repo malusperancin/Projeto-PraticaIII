@@ -46,7 +46,7 @@ public class CidadeHomeAdapter extends ArrayAdapter<Pais> {
             view = layoutinflater.inflate(layoutResourceId,parent,false);
         }
 
-        ImageView imgPais = (ImageView) view.findViewById(R.id.imgPais);
+        ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
         TextView tvPais = (TextView) view.findViewById(R.id.tvNome);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);

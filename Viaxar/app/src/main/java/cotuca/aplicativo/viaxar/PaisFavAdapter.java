@@ -1,6 +1,5 @@
 package cotuca.aplicativo.viaxar;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,18 +51,13 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
             view = layoutinflater.inflate(layoutResourceId,parent,false);
         }
 
-        ImageView imgPais = (ImageView) view.findViewById(R.id.imgPais);
+        ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
         TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
         TextView tvLingua = (TextView) view.findViewById(R.id.tvLingua);
 
         final Pais pais = dados.get(position);
-        try{
-            //pais.setImagem(pais.getFoto());
-            pais.setImagemBandeira(pais.getBandeira());
-        }
-        catch (Exception ex){ex.printStackTrace();}
 
         imgPais.setImageBitmap(pais.getImagem());
         imgBandeira.setImageBitmap(pais.getImagemBandeira());
@@ -84,6 +78,12 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
                         if(response.isSuccess()) //conectou com o node
                         {
                             Toast.makeText(getContext(), "uhul foi", Toast.LENGTH_LONG).show();
+                            parent.removeViewInLayout(parent.getChildAt(position));
+                            //parent.notifyDataSetChanged();
+                            //parent.removeView(parent);
+                            //parent.getChildAt(position).setVisibility(View.GONE);
+                            //parent.refreshDrawableState()
+                            //view.refreshDrawableState();
                         }
                         else
                             Toast.makeText(getContext(), "Ocorreu um erro ao excluir o pais fav", Toast.LENGTH_LONG).show();
@@ -93,20 +93,11 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
                     public void onFailure(Throwable t) {
                         Toast.makeText(getContext(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
                     }
+
                 });
-                //atualizar
-                //parent.getChildAt(position)
-
-                dados.remove(position);
-                view.notify();
             }
-
-
         });
 
         return view;
     }
-
-
-
 }
