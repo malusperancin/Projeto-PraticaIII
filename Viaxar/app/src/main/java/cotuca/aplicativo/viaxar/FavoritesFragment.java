@@ -1,5 +1,8 @@
 package cotuca.aplicativo.viaxar;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.se.omapi.Session;
 import android.view.LayoutInflater;
@@ -17,6 +20,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +49,7 @@ public class FavoritesFragment extends Fragment {
         listaPais = new ArrayList<Pais>();
         lvPais = (ListView) root.findViewById(R.id.listaPaises);
         consultarPaisesFavoritos();
-    //    lvPais.
+        //    lvPais.
         return root;
     }
 
@@ -74,5 +79,48 @@ public class FavoritesFragment extends Fragment {
                 Toast.makeText(getActivity(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private class MyTask extends AsyncTask<String, String, List<Pais>>
+    {
+        // @Override
+        // protected void onPreExecute(){
+        //   return super.onPreExecute();
+        //}
+
+        @Override
+        protected List<Pais> doInBackground(String... params) {
+            for(Pais pais:listaPais){
+                try{
+                    String urlBandeira = pais.getBandeira();
+                    String urlImagem = pais.getFoto();
+                    InputStream inputStreamBandeira = (InputStream) new URL(urlBandeira).getContent();
+                    Bitmap bitmapBandeira = BitmapFactory.decodeStream(inputStreamBandeira);
+
+                    InputStream inputStreamFoto = (InputStream) new URL(urlImagem).getContent();
+                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputStreamFoto);
+
+                    pais.setImagem(bitmapFoto);
+                    pais.setImagemBandeira(bitmapBandeira);
+
+                    inputStreamFoto.close();
+                    inputStreamBandeira.close();
+                }
+                catch (Exception e){e.printStackTrace();}
+            }
+
+            return listaPais;
+        }
+
+        private void buscarDados(String url){
+            MyTask task = new MyTask();
+            task.execute(url);
+        }
+
+        @Override
+        protected void onPostExecute(List<Pais> s)
+        {
+            atualizarView();
+        }
     }
 }

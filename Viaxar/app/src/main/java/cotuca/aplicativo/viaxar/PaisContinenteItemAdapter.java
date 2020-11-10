@@ -1,7 +1,6 @@
 package cotuca.aplicativo.viaxar;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,16 +44,16 @@ public class PaisContinenteItemAdapter extends ArrayAdapter<Pais>{
             view = layoutinflater.inflate(layoutResourceId,parent,false);
         }
 
-        ImageView imgPais = (ImageView) view.findViewById(R.id.imgPais);
+        ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
         TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvCapital = (TextView) view.findViewById(R.id.tvCapital);
-        TextView tvIdioma = (TextView) view.findViewById(R.id.tvIdioma);
 
         Pais pais = dados.get(position);
         imgPais.setImageBitmap(pais.getImagem());
         tvNome.setText(pais.getNome());
         tvCapital.setText(pais.getCapital());
-        tvIdioma.setText(pais.getIdioma());
+
+        view.setBackgroundResource(R.drawable.pais_continente_bg);
 
         return view;
     }
