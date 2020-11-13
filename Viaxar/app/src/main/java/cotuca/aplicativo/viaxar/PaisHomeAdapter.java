@@ -1,26 +1,25 @@
 package cotuca.aplicativo.viaxar;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.InputStream;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import cotuca.aplicativo.viaxar.dbos.Pais;
-import cotuca.aplicativo.viaxar.svgandroid.SVG;
-import cotuca.aplicativo.viaxar.svgandroid.SVGParser;
+import cotuca.aplicativo.viaxar.dbos.Usuario;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class PaisHomeAdapter extends ArrayAdapter<Pais> {
     Context context;
@@ -44,6 +43,7 @@ public class PaisHomeAdapter extends ArrayAdapter<Pais> {
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
+
         view = convertView;
 
         if(view == null) {
@@ -51,15 +51,15 @@ public class PaisHomeAdapter extends ArrayAdapter<Pais> {
             view = layoutinflater.inflate(layoutResourceId,parent,false);
         }
 
-        ImageView imgPais = (ImageView) view.findViewById(R.id.imgPais);
+        ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
         TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
 
-        Pais pais = this.dados.get(position);
+        final Pais pais = dados.get(position);
 
         imgPais.setImageBitmap(pais.getImagem());
-        imgBandeira.setImageDrawable(pais.getImagemBandeira());
+        imgBandeira.setImageBitmap(pais.getImagemBandeira());
         tvNome.setText(pais.getNome());
         tvContinente.setText(pais.getContinente());
 

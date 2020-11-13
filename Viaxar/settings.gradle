@@ -1,3 +1,2 @@
-include ':android-svg'
 include ':app'
 rootProject.name = "Viaxar"

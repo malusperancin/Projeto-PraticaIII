@@ -16,8 +16,7 @@ public class Pais implements Cloneable
     int id, populacao;
     float lat, lng;
     String nome, bandeira, moeda, idioma, clima, religiao, sigla, capital, continente, descricao, foto, ddd;
-    Bitmap imagem;
-    Drawable imagemBandeira;
+    Bitmap imagem, imagemBandeira;
     boolean lgbt;
 
     public int getId() {
@@ -178,16 +177,15 @@ public class Pais implements Cloneable
         this.imagem = img;
 
     }
-
-    public Drawable getImagemBandeira() {
+    public Bitmap getImagemBandeira() {
         return imagemBandeira;
     }
 
-    public void setImagemBandeira(Drawable img) throws Exception {
-        if (img == null)
+    public void setImagemBandeira(Bitmap img) throws Exception {
+        if (img.equals("") || img == null)
             throw new Exception("URL inválida");
-
         this.imagemBandeira = img;
+
     }
 
     public String getDescricao() {

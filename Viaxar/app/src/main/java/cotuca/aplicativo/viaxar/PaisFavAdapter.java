@@ -55,15 +55,13 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
         TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
-        TextView tvLingua = (TextView) view.findViewById(R.id.tvLingua);
 
         final Pais pais = dados.get(position);
 
         imgPais.setImageBitmap(pais.getImagem());
-        imgBandeira.setImageDrawable(pais.getImagemBandeira());
+        imgBandeira.setImageBitmap(pais.getImagemBandeira());
         tvNome.setText(pais.getNome());
         tvContinente.setText(pais.getContinente());
-        tvLingua.setText(pais.getIdioma());
 
         ImageView fav = (ImageView) view.findViewById(R.id.imgCoracaoVermelho);
         fav.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +77,6 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
                         {
                             Toast.makeText(getContext(), "uhul foi", Toast.LENGTH_LONG).show();
                             parent.removeViewInLayout(parent.getChildAt(position));
-                            //parent.notifyDataSetChanged();
-                            //parent.removeView(parent);
-                            //parent.getChildAt(position).setVisibility(View.GONE);
-                            //parent.refreshDrawableState()
-                            //view.refreshDrawableState();
                         }
                         else
                             Toast.makeText(getContext(), "Ocorreu um erro ao excluir o pais fav", Toast.LENGTH_LONG).show();

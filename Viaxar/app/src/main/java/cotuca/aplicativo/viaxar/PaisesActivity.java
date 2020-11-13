@@ -2,7 +2,11 @@ package cotuca.aplicativo.viaxar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +33,10 @@ public class PaisesActivity extends AppCompatActivity {
     ListView lvPais;
     GridView gvPais;
     SessionManager session;
+    PaisContinenteItemAdapter adapter;
     HashMap<String, String> user;
     String continente;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +92,9 @@ public class PaisesActivity extends AppCompatActivity {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaPais = response.body();
-                    atualizarView();
+                    MyTask task = new MyTask();
+                    task.execute();
+                    //atualizarView();
                 }
                 else
                     Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();
@@ -95,5 +105,40 @@ public class PaisesActivity extends AppCompatActivity {
                 Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private class MyTask extends AsyncTask<String, String, List<Pais>> {
+
+        @Override
+        protected void onPreExecute() {
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Pais> doInBackground(String... params) {
+            try {
+                for (Pais pais : listaPais) {
+
+                    String urlBandeira = pais.getBandeira();
+
+                    InputStream inputBandeira = (InputStream) new URL(urlBandeira).getContent();
+                    Bitmap bitmapBandeira = BitmapFactory.decodeStream(inputBandeira);
+                    pais.setImagemBandeira(bitmapBandeira);
+
+                    inputBandeira.close();
+                }
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+
+
+            return listaPais;
+        }
+
+        @Override
+        protected void onPostExecute(List<Pais> s) {
+            atualizarView();
+            //progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 }

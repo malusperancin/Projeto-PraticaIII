@@ -32,6 +32,7 @@ public class FavoritesFragment extends Fragment {
     ListView lvPais;
     SessionManager session;
     HashMap<String, String> user;
+    PaisFavAdapter adapter;
     FavoritesFragmentViewModel favoritesFragmentViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,7 +62,9 @@ public class FavoritesFragment extends Fragment {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaPais = response.body();
-                    atualizarView();
+                    MyTask task = new MyTask();
+                    task.execute();
+                    //atualizarView();
                 }
                 else
                     Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();
@@ -77,15 +80,6 @@ public class FavoritesFragment extends Fragment {
     private class MyTask extends AsyncTask<String, String, List<Pais>>
     {
 
-        // @Override
-        // protected void onPreExecute(){
-
-       // @Override
-       // protected void onPreExecute(){
-
-        //   return super.onPreExecute();
-        //}
-
         @Override
         protected List<Pais> doInBackground(String... params) {
             for(Pais pais:listaPais){
@@ -99,7 +93,7 @@ public class FavoritesFragment extends Fragment {
                     Bitmap bitmapFoto = BitmapFactory.decodeStream(inputStreamFoto);
 
                     pais.setImagem(bitmapFoto);
-                    //pais.setImagemBandeira(bitmapBandeira);
+                    pais.setImagemBandeira(bitmapBandeira);
 
                     inputStreamFoto.close();
                     inputStreamBandeira.close();
@@ -110,15 +104,11 @@ public class FavoritesFragment extends Fragment {
             return listaPais;
         }
 
-        private void buscarDados(String url){
-            MyTask task = new MyTask();
-            task.execute(url);
-        }
-
         @Override
         protected void onPostExecute(List<Pais> s)
         {
-            atualizarView();
+            adapter = new PaisFavAdapter(getActivity(), R.layout.pais_fav, s);
+            lvPais.setAdapter(adapter);
         }
     }
 }

@@ -51,7 +51,7 @@ public class SessionManager {
     public HashMap<String, String> getUserDetail(){
 
         HashMap<String, String> user = new HashMap<>();
-        user.put(ID, sharedPreferences.getInt(ID, 0)+"");
+        user.put(ID, sharedPreferences.getInt(ID, 0) + "");
         user.put(NAME, sharedPreferences.getString(NAME, null));
         user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
         user.put(CELULAR, sharedPreferences.getString(CELULAR, null));
@@ -61,11 +61,13 @@ public class SessionManager {
 
 
     public void logout(){
+
         editor.clear();
         editor.commit();
         Intent i = new Intent(context, LoginActivity.class);
         context.startActivity(i);
         ((MenuActivity) context).finish();
+
     }
 
 }

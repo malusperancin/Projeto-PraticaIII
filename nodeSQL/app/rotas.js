@@ -120,7 +120,7 @@ module.exports = (app) => {
                     result.recordset[i].nome.toLowerCase()
                 );
                 res = JSON.parse(res.body.toString("utf-8"));
-                paises[i].bandeira = res[0].flag;
+                paises[i].bandeira = "https://www.countryflags.io/"+ res[0].alpha2Code+ "/flat/64.png";
                 paises[i].idioma = res[0].languages[0].name;
                 paises[i].continente = res[0].region;
                 paises[i].moeda =
@@ -174,7 +174,7 @@ module.exports = (app) => {
                 ret.push({
                     id: result.recordset[i].id,
                     nome: result.recordset[i].nome,
-                    bandeira: res[0].flag,
+                    bandeira: "https://www.countryflags.io/"+ res[0].alpha2Code+ "/flat/64.png",
                     moeda: res[0].currencies[0].name +
                         " (" +
                         res[0].currencies[0].symbol +
@@ -212,7 +212,7 @@ module.exports = (app) => {
           ret = [{
               id: result.recordset[0].id,
               nome: result.recordset[0].nome,
-              bandeira: res[0].flag,
+              bandeira: "https://www.countryflags.io/"+ res[0].alpha2Code+ "/flat/64.png",
               moeda: res[0].currencies[0].name +
                   " (" +
                   res[0].currencies[0].symbol +
@@ -252,7 +252,7 @@ module.exports = (app) => {
         ret = [{
             id: result.recordset[0].id,
             nome: result.recordset[0].nome,
-            bandeira: res[0].flag,
+            bandeira: "https://www.countryflags.io/"+ res[0].alpha2Code+ "/flat/64.png",
             moeda: res[0].currencies[0].name +
                 " (" +
                 res[0].currencies[0].symbol +
@@ -389,7 +389,7 @@ module.exports = (app) => {
             ret.push({
                 id: result.recordset[i].id,
                 nome: result.recordset[i].nome,
-                bandeira: res[0].flag,
+                bandeira: "https://www.countryflags.io/"+ res[0].alpha2Code+ "/flat/64.png",
                 moeda: res[0].currencies[0].name +
                     " (" +
                     res[0].currencies[0].symbol +

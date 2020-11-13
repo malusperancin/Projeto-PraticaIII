@@ -44,12 +44,12 @@ public class PaisContinenteItemAdapter extends ArrayAdapter<Pais>{
             view = layoutinflater.inflate(layoutResourceId,parent,false);
         }
 
-        ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
+        ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBack);
         TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
         TextView tvCapital = (TextView) view.findViewById(R.id.tvCapital);
 
         Pais pais = dados.get(position);
-        imgPais.setImageBitmap(pais.getImagem());
+        imgBandeira.setImageBitmap(pais.getImagemBandeira());
         tvNome.setText(pais.getNome());
         tvCapital.setText(pais.getCapital());
 

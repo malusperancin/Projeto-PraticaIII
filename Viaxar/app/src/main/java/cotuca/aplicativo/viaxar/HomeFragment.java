@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +29,6 @@ import java.util.function.Predicate;
 
 import cotuca.aplicativo.viaxar.R;
 import cotuca.aplicativo.viaxar.dbos.Pais;
-import cotuca.aplicativo.viaxar.svgandroid.SVG;
-import cotuca.aplicativo.viaxar.svgandroid.SVGParser;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -108,6 +105,11 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    protected void atualizarView(){
+        PaisHomeAdapter adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, listaPais);
+        lvPais.setAdapter(adapter);
+    }
+
     public void consultarPaises()
     {
         Call<List<Pais>> call = new RetrofitConfig().getService().selecionarPaises();
@@ -119,6 +121,7 @@ public class HomeFragment extends Fragment {
                     listaPais = response.body();
                     MyTask task = new MyTask();
                     task.execute();//listaPais);
+                    //atualizarView();
                 }
                 else
                     Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises", Toast.LENGTH_LONG).show();
@@ -150,16 +153,14 @@ public class HomeFragment extends Fragment {
                     Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
                     pais.setImagem(bitmapFoto);
 
-                    /*FOI MEIO MERDA MAIS FOI*/
                     InputStream inputBandeira = (InputStream) new URL(urlBandeira).getContent();
-                    SVG svg =  SVGParser.getSVGFromInputStream(inputBandeira);
-                    Drawable drawable = svg.createPictureDrawable();
-                    pais.setImagemBandeira(drawable);
+                    Bitmap bitmapBandeira = BitmapFactory.decodeStream(inputBandeira);
+                    pais.setImagemBandeira(bitmapBandeira);
 
                     inputImagem.close();
-                    inputImagem.close();
+                    inputBandeira.close();
                 }
-            } catch(Exception err) {
+            } catch (Exception err) {
                 err.printStackTrace();
             }
 
@@ -170,7 +171,6 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(List<Pais> s) {
             adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, s);
             lvPais.setAdapter(adapter);
-
             //progressBar.setVisibility(View.INVISIBLE);
         }
     }
