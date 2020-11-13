@@ -99,7 +99,7 @@ public class FavoritesFragment extends Fragment {
                     Bitmap bitmapFoto = BitmapFactory.decodeStream(inputStreamFoto);
 
                     pais.setImagem(bitmapFoto);
-                    pais.setImagemBandeira(bitmapBandeira);
+                    //pais.setImagemBandeira(bitmapBandeira);
 
                     inputStreamFoto.close();
                     inputStreamBandeira.close();

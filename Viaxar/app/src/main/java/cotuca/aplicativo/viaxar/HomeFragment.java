@@ -1,7 +1,12 @@
 package cotuca.aplicativo.viaxar;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,6 +30,8 @@ import java.util.function.Predicate;
 
 import cotuca.aplicativo.viaxar.R;
 import cotuca.aplicativo.viaxar.dbos.Pais;
+import cotuca.aplicativo.viaxar.svgandroid.SVG;
+import cotuca.aplicativo.viaxar.svgandroid.SVGParser;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -99,11 +108,6 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    protected void atualizarView(){
-        PaisHomeAdapter adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, listaPais);
-        lvPais.setAdapter(adapter);
-    }
-
     public void consultarPaises()
     {
         Call<List<Pais>> call = new RetrofitConfig().getService().selecionarPaises();
@@ -113,10 +117,8 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaPais = response.body();
-                    consulta = response.body();
-                    adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, listaPais);
-                    lvPais.setAdapter(adapter);
-                    //atualizarView();
+                    MyTask task = new MyTask();
+                    task.execute();//listaPais);
                 }
                 else
                     Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises", Toast.LENGTH_LONG).show();
@@ -127,5 +129,49 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private class MyTask extends AsyncTask<String, String, List<Pais>> {
+
+        @Override
+        protected void onPreExecute() {
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Pais> doInBackground(String... params) {
+            try {
+                for (Pais pais : listaPais) {
+
+                    String urlFoto = pais.getFoto();
+                    String urlBandeira = pais.getBandeira();
+
+                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                    pais.setImagem(bitmapFoto);
+
+                    /*FOI MEIO MERDA MAIS FOI*/
+                    InputStream inputBandeira = (InputStream) new URL(urlBandeira).getContent();
+                    SVG svg =  SVGParser.getSVGFromInputStream(inputBandeira);
+                    Drawable drawable = svg.createPictureDrawable();
+                    pais.setImagemBandeira(drawable);
+
+                    inputImagem.close();
+                    inputImagem.close();
+                }
+            } catch(Exception err) {
+                err.printStackTrace();
+            }
+
+            return listaPais;
+        }
+
+        @Override
+        protected void onPostExecute(List<Pais> s) {
+            adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, s);
+            lvPais.setAdapter(adapter);
+
+            //progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 }

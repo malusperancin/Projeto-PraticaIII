@@ -2,6 +2,7 @@ package cotuca.aplicativo.viaxar.dbos;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,8 @@ public class Pais implements Cloneable
     int id, populacao;
     float lat, lng;
     String nome, bandeira, moeda, idioma, clima, religiao, sigla, capital, continente, descricao, foto, ddd;
-    Bitmap imagem, imagemBandeira;
+    Bitmap imagem;
+    Drawable imagemBandeira;
     boolean lgbt;
 
     public int getId() {
@@ -177,30 +179,15 @@ public class Pais implements Cloneable
 
     }
 
-    public Bitmap getImagemBandeira() {
-        return imagem;
+    public Drawable getImagemBandeira() {
+        return imagemBandeira;
     }
 
-    public void setImagemBandeira(Bitmap img) throws Exception {
-        if (img.equals("") || img == null)
+    public void setImagemBandeira(Drawable img) throws Exception {
+        if (img == null)
             throw new Exception("URL inválida");
-        //this.imagemBandeira = getBitmapFromURL(url);
-        this.imagemBandeira = img;
-    }
 
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        this.imagemBandeira = img;
     }
 
     public String getDescricao() {

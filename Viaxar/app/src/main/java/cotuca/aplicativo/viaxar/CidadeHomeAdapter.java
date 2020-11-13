@@ -54,7 +54,7 @@ public class CidadeHomeAdapter extends ArrayAdapter<Pais> {
 
         Pais pais = dados.get(position);
         imgPais.setImageBitmap(pais.getImagem());
-        imgBandeira.setImageBitmap(pais.getImagemBandeira());
+        //imgBandeira.setImageDrawable(pais.getImagemBandeira());
         tvPais.setText(pais.getNome());
         tvContinente.setText(pais.getContinente());
         tvLingua.setText(pais.getIdioma());

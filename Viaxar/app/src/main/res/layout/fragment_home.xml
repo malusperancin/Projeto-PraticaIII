@@ -1,45 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cinzaFundo"
+    android:paddingBottom="60dp"
     android:scrollbarSize="0dp"
-    tools:context=".HomeFragment"
-    android:paddingBottom="60dp">
-
-    <TextView
-        android:id="@+id/tvIndicador2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Searching for:"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:ignore="MissingConstraints" />
+    android:orientation="vertical"
+    tools:context=".HomeFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:paddingTop="15dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_titulo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#212121"
-            app:popupTheme="@style/AppTheme.TitleFont"
-            app:contentInsetStart="0dp">
-
+            app:contentInsetStart="0dp"
+            app:popupTheme="@style/AppTheme.TitleFont">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -48,56 +31,68 @@
                 android:src="@drawable/logo_home" />
 
         </androidx.appcompat.widget.Toolbar>
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="338dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coordinatorLayout" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvIndicador"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="All"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tvIndicador2"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:ignore="MissingConstraints" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="136dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/traco"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIndicador"
-        app:tint="@android:color/white" />
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="338dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="20dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
+                android:layout_gravity="center_horizontal"/>
 
-    <ListView
-        android:id="@+id/lvPaises"
-        android:layout_width="343dp"
-        android:layout_height="303dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        app:layout_constraintVertical_bias="1.0" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="35dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvIndicador2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Searching for:"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvIndicador"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="All"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/tvIndicador2"/>
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="136dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/traco"
+                    android:layout_alignBottom="@+id/tvIndicador2"/>
+            </RelativeLayout>
+
+
+            <ListView
+                android:id="@+id/lvPaises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
