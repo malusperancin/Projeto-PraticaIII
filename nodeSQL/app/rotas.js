@@ -279,12 +279,13 @@ module.exports = (app) => {
     });
 });
 
-    app.get("/api/cidades/pais/:busc", function(req, res) {
+    app.get("/api/cidades/pais/:busc", function(req, resp) {
+        console.log("entrou");
+        var ret = [];
         var busc = req.params.busc;
         conexao.query(
             `select * from cidades where idPais = ` + busc,
             (err, result) => {
-                var ret = [];
                 for (var i = 0; i < result.recordset.length; i++) {
                     var res = sync(
                         "GET",
@@ -310,10 +311,11 @@ module.exports = (app) => {
                         estado: res.location_string
                     });
 
-                    //console.log(ret[i]);
+                    console.log(ret[i]);
                 }
+                resp.send(ret);
             }
-        );
+            );
     });
 
     app.get("/api/pais/atracoes/:busc", function(req, res) {
