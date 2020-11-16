@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -82,7 +83,8 @@ public class HomeFragment extends Fragment {
                 if(!newText.equals("")) {
                     tvIndicador.setText("'"+newText+"'");
                     for (int i = 0; i < listaPais.size(); i++)
-                        if (listaPais.get(i).getNome().toLowerCase().contains(newText.toLowerCase()))
+                        if (listaPais.get(i).getNome().toLowerCase().contains(newText.toLowerCase()) ||
+                            listaPais.get(i).getContinente().toLowerCase().contains(newText.toLowerCase()))
                             consulta.add(listaPais.get(i));
                 }
                 else
@@ -93,8 +95,8 @@ public class HomeFragment extends Fragment {
 
 
                 adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, consulta);
-
                 lvPais.setAdapter(adapter);
+                setListViewHeightBasedOnChildren(lvPais);
 
                 return false;
             }
@@ -171,7 +173,28 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(List<Pais> s) {
             adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, s);
             lvPais.setAdapter(adapter);
+            setListViewHeightBasedOnChildren(lvPais);
             //progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+
+        if (listAdapter == null)
+            return;
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1)) + 25;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 }

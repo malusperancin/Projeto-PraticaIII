@@ -163,7 +163,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="197dp"
+        android:layout_width="wrap_content"
         android:layout_height="59dp"
         android:fontFamily="@font/bukhariscriptttf"
         android:text="Welcome,"
@@ -179,7 +179,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="225dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:fontFamily="@font/bukhariscriptttf"
         android:text="Sign in to continue!"

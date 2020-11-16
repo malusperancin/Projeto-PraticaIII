@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="#212121"
     android:orientation="vertical"
-    tools:context=".PaisActivity"
-    >
+    tools:context=".PaisActivity">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -421,10 +420,6 @@
 
                 </HorizontalScrollView>
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </ScrollView>
 </LinearLayout>
