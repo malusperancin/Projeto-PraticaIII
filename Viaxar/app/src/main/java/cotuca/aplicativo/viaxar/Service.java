@@ -36,7 +36,6 @@ public interface Service {
     @GET("paises/{id}")
     Call<List<Pais>> selecionarPais(@Path("id") int id);
 
-
     @GET("paises/nome/{nome}")
     Call<List<Pais>> selecionarPaisByNome(@Path("nome") String nome);
 

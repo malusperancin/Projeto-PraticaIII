@@ -1,9 +1,12 @@
 package cotuca.aplicativo.viaxar.dbos;
 
+import android.graphics.Bitmap;
+
 public class Cidade implements Cloneable
 {
     int id, codAPI, idPais;
-    String nome, descricao, foto,localizacao;
+    String nome, descricao, foto,estado;
+    Bitmap imagem;
 
     public int getId() {
         return id;
@@ -15,14 +18,14 @@ public class Cidade implements Cloneable
         this.id = id;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setLocalizacao(String localizacao) throws Exception{
-        if(localizacao.equals("") || localizacao == null)
+    public void setEstado(String estado) throws Exception{
+        if(estado.equals("") || estado == null)
             throw new Exception("localização inválida");
-        this.localizacao = localizacao;
+        this.estado = estado;
     }
 
     public int getCodAPI() {
@@ -55,16 +58,6 @@ public class Cidade implements Cloneable
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) throws Exception{
-        if(descricao.equals("") || descricao == null)
-            throw new Exception("Descricao inválida");
-        this.descricao = descricao;
-    }
-
     public String getFoto() {
         return foto;
     }
@@ -75,14 +68,26 @@ public class Cidade implements Cloneable
         this.foto = foto;
     }
 
-    public Cidade(int id, int codAPI, int idPais, String nome, String descricao, String foto) throws Exception
+
+    public Bitmap getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Bitmap img) throws Exception {
+        if (img.equals("") || img == null)
+            throw new Exception("URL inválida");
+        this.imagem = img;
+
+    }
+
+    public Cidade(int id, int codAPI, int idPais, String nome, String foto,String estado) throws Exception
     {
         setId(id);
         setCodAPI(codAPI);
         setIdPais(idPais);
         setNome(nome);
-        setDescricao(descricao);
         setFoto(foto);
+        setEstado(estado);
     }
 
     public boolean equals(Object object) {
@@ -102,7 +107,7 @@ public class Cidade implements Cloneable
                 getIdPais() == pais.getIdPais() &&
                 getCodAPI() == pais.getCodAPI() &&
                 getNome().equals(pais.getNome()) &&
-                getDescricao().equals(pais.getDescricao()) &&
+                getEstado().equals(pais.getEstado()) &&
                 java.util.Objects.equals(getFoto(), pais.getFoto());
     }
 
@@ -113,7 +118,7 @@ public class Cidade implements Cloneable
         ret = 7 * ret + new Integer(getIdPais()).hashCode();
         ret = 7 * ret + new Integer(getCodAPI()).hashCode();
         ret = 7 * ret + getNome().hashCode();
-        ret = 7 * ret + getDescricao().hashCode();
+        ret = 7 * ret + getEstado().hashCode();
         ret = 7 * ret + getFoto().hashCode();
 
         if(ret < 0)
@@ -129,7 +134,7 @@ public class Cidade implements Cloneable
                 ", idPais=" + idPais +
                 ", codAPI=" + codAPI +
                 ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
+                ", estado='" + estado + '\'' +
                 ", foto='" + foto + '\'' +
                 '}';
     }
@@ -142,7 +147,7 @@ public class Cidade implements Cloneable
         this.id = modelo.id;
         this.nome = modelo.nome;
         this.codAPI = modelo.codAPI;
-        this.descricao = modelo.descricao;
+        this.estado = modelo.estado;
         this.foto = modelo.foto;
         this.idPais = modelo.idPais;
     }

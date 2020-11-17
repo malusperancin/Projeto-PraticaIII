@@ -45,7 +45,7 @@ public class PaisContinenteItemAdapter extends ArrayAdapter<Pais>{
         }
 
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBack);
-        TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
+        TextView tvNome = (TextView) view.findViewById(R.id.tvNomeCidade);
         TextView tvCapital = (TextView) view.findViewById(R.id.tvCapital);
 
         Pais pais = dados.get(position);

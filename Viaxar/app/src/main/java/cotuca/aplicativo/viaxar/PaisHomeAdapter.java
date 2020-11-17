@@ -6,26 +6,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.HashMap;
 import java.util.List;
 
 import cotuca.aplicativo.viaxar.dbos.Pais;
-import cotuca.aplicativo.viaxar.dbos.Usuario;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 public class PaisHomeAdapter extends ArrayAdapter<Pais> {
     Context context;
     int layoutResourceId;
     List<Pais> dados;
     View view;
+    String continente;
 
     public PaisHomeAdapter (@NonNull Context context, int resource, @NonNull List<Pais> dados) {
         super(context, resource, dados);
@@ -53,7 +47,7 @@ public class PaisHomeAdapter extends ArrayAdapter<Pais> {
 
         ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
-        TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
+        TextView tvNome = (TextView) view.findViewById(R.id.tvNomeCidade);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
 
         final Pais pais = dados.get(position);
@@ -61,7 +55,23 @@ public class PaisHomeAdapter extends ArrayAdapter<Pais> {
         imgPais.setImageBitmap(pais.getImagem());
         imgBandeira.setImageBitmap(pais.getImagemBandeira());
         tvNome.setText(pais.getNome());
-        tvContinente.setText(pais.getContinente());
+
+        switch (pais.getContinente())
+        {
+            case "EU": continente = "Europe";
+            break;
+            case "AM": continente = "America";
+            break;
+            case "OC": continente = "Oceania";
+            break;
+            case "AS": continente = "Asia";
+            break;
+            case "AF": continente = "Africa";
+            break;
+
+        }
+
+        tvContinente.setText(continente);
 
         return view;
     }

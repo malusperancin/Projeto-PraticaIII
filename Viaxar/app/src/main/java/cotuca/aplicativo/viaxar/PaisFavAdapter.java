@@ -53,7 +53,7 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
 
         ImageView imgPais = (ImageView) view.findViewById(R.id.imgBack);
         ImageView imgBandeira = (ImageView) view.findViewById(R.id.imgBandeira);
-        TextView tvNome = (TextView) view.findViewById(R.id.tvNome);
+        TextView tvNome = (TextView) view.findViewById(R.id.tvNomeCidade);
         TextView tvContinente = (TextView) view.findViewById(R.id.tvContinente);
 
         final Pais pais = dados.get(position);

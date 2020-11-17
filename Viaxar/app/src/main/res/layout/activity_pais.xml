@@ -137,30 +137,20 @@
                     android:paddingTop="30dp">
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/imgCidade"
                         android:layout_width="match_parent"
                         android:layout_height="167dp"
+                        android:scaleType="centerCrop"
                         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                     <TextView
                         android:id="@+id/tvEstado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imageView8"
-                        android:layout_alignEnd="@id/imageView8"
+                        android:layout_below="@id/imgCidade"
+                        android:layout_alignEnd="@id/imgCidade"
                         android:layout_margin="5sp"
                         android:text="Estado/Provincia"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvNome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/imageView8"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="5sp"
-                        android:text="Nome-Cidade"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold" />
 

@@ -3,11 +3,18 @@ package cotuca.aplicativo.viaxar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import cotuca.aplicativo.viaxar.dbos.Pais;
@@ -20,7 +27,9 @@ import retrofit.Retrofit;
 public class PaisActivity extends AppCompatActivity {
 
     List<Cidade> listaCidades;
-    TextView descricao, capital, lingua, moeda, populacao, clima, religiao, lgbt,nome;
+    TextView descricao, capital, lingua, moeda, populacao, clima, religiao, lgbt, nome, estado;
+    Button btn1, btn2, btn3;
+    ImageView imgCidade;
     boolean ehFavorito;
 
     ImageView back, fav;
@@ -70,7 +79,72 @@ public class PaisActivity extends AppCompatActivity {
 
         consultarPais(id);
         checarFavorito(Integer.parseInt(user.get(session.ID)),id);
-        //consultarCidadesPais(id);
+        consultarCidadesPais(id);
+
+        btn1 = (Button)findViewById(R.id.btnCidade1);
+        btn2 = (Button)findViewById(R.id.btnCidade2);
+        btn3 = (Button)findViewById(R.id.btnCidade3);
+        estado = (TextView)findViewById(R.id.tvEstado);
+        imgCidade = (ImageView)findViewById(R.id.imgCidade);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cidade cidade = listaCidades.get(0);
+                estado.setText(cidade.getEstado());
+                imgCidade.setImageBitmap(cidade.getImagem());
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cidade cidade = listaCidades.get(1);
+                estado.setText(cidade.getEstado());
+                imgCidade.setImageBitmap(cidade.getImagem());
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cidade cidade = listaCidades.get(2);
+                estado.setText(cidade.getEstado());
+                imgCidade.setImageBitmap(cidade.getImagem());
+            }
+        });
+    }
+
+    private class MyTask extends AsyncTask<String, String, List<Cidade>> {
+
+        @Override
+        protected void onPreExecute() {
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Cidade> doInBackground(String... params) {
+            try {
+                for (Cidade cidade : listaCidades) {
+
+                    String urlFoto = cidade.getFoto();
+
+                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                    cidade.setImagem(bitmapFoto);
+
+                    inputImagem.close();
+                }
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+            return listaCidades;
+        }
+
+        @Override
+        protected void onPostExecute(List<Cidade> s) {
+            btn1.callOnClick();
+            //setListViewHeightBasedOnChildren(lvPais);
+            //progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void adicionarAosFavoritos(){
@@ -132,7 +206,6 @@ public class PaisActivity extends AppCompatActivity {
         });
     }
 
-
     public void checarFavorito(int idPais, int idUsuario){
         // Classe Call é usada p/ executar a solicitação à API
 
@@ -169,7 +242,8 @@ public class PaisActivity extends AppCompatActivity {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaCidades = response.body();
-                    //atualizarView();
+                    MyTask task = new MyTask();
+                    task.execute();
                 }
                 else {
                     Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();

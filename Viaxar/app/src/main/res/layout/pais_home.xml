@@ -43,7 +43,7 @@
                     android:layout_centerVertical="true">
 
                     <TextView
-                        android:id="@+id/tvNome"
+                        android:id="@+id/tvNomeCidade"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Pais"

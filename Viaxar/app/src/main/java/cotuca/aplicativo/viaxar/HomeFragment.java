@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment {
                 {
                     listaPais = response.body();
                     MyTask task = new MyTask();
-                    task.execute();//listaPais);
+                    task.execute(); //listaPais);
                     //atualizarView();
                 }
                 else
@@ -165,7 +165,6 @@ public class HomeFragment extends Fragment {
             } catch (Exception err) {
                 err.printStackTrace();
             }
-
             return listaPais;
         }
 
@@ -173,7 +172,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(List<Pais> s) {
             adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, s);
             lvPais.setAdapter(adapter);
-            setListViewHeightBasedOnChildren(lvPais);
+            //setListViewHeightBasedOnChildren(lvPais);
             //progressBar.setVisibility(View.INVISIBLE);
         }
     }
