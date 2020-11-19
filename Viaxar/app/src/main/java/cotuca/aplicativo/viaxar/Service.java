@@ -1,8 +1,9 @@
 package cotuca.aplicativo.viaxar;
 
 import java.util.List;
-
+import cotuca.aplicativo.viaxar.dbos.Atracao;
 import cotuca.aplicativo.viaxar.dbos.Cidade;
+import cotuca.aplicativo.viaxar.dbos.Hotel;
 import cotuca.aplicativo.viaxar.dbos.Pais;
 import cotuca.aplicativo.viaxar.dbos.Usuario;
 import retrofit.Call;
@@ -56,4 +57,13 @@ public interface Service {
 
     @GET("paises/favoritos/checar/{idUsuario}/{idPais}")
     Call<Boolean> checarFavorito(@Path("idUsuario") int idUsuario, @Path("idPais") int idPais);
+
+    @GET("cidade/restaurantes/{idCidade}")
+    Call<List<Atracao>> selecionarRestaurantes(@Path("idCidade") int idCidade);
+
+    @GET("cidade/pontos/{idCidade}")
+    Call<List<Atracao>> selecionarPontos(@Path("idCidade") int idCidade);
+
+    @GET("cidade/hoteis/{idCidade}")
+    Call<List<Hotel>> selecionarHoteis(@Path("idCidade") int idCidade);
 }

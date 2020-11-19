@@ -42,7 +42,6 @@ module.exports = (app) => {
 
 
     app.post('/api/usuario/post', (requisicao, resposta) => { //ADICIONA USUARIO
-        // console.log(requisicao);
         const senha = requisicao.body.senha;
         const email = requisicao.body.email;
         global.conexao.query("SELECT * from Usuarios WHERE email='" + email + "'", (err, result) => {
@@ -70,10 +69,6 @@ module.exports = (app) => {
         const email = usuario.email;
         const celular = usuario.celular;
 
-        //console.log(email);
-        //console.log(celular);
-        //console.log(usuario.id);
-
         conexao.query(`SELECT * FROM Usuarios where email = '${email}'`, (err, result) => {
             if (result.body == undefined)
                 execSQL(`update Usuarios set email='${email}', celular='${celular}' where id=${usuario.id}`, resp);
@@ -90,9 +85,7 @@ module.exports = (app) => {
         const usuarioId = req.body.id;
         const senhaOld = req.params.senhaOld;
         const senhaNew = req.params.senhaNew;
-
         conexao.query(`SELECT * FROM Usuarios where id = ${usuarioId}`, (err, result) => {
-            //console.log(result.recordset[0].senha);
             if (result.recordset[0].senha == senhaOld)
                 execSQL(`update Usuarios set senha='${senhaNew}' where id = '${usuarioId}'`, resp);
             else
@@ -184,10 +177,7 @@ module.exports = (app) => {
                     lat: result.recordset[i].lat,
                     lng: result.recordset[i].lng
                 });
-                console.log(ret[i]);
             }
-
-
             resp.send(ret);
 
         });
@@ -195,7 +185,7 @@ module.exports = (app) => {
 
 
     app.get("/api/paises/inserir", function (req, resp) {
-        conexao.query(`select * from paises`, (err, result) => {
+        conexao.query(`select * from paises where id>34`, (err, result) => {
             var ret = [];
 
             for (var i = 0; i < result.recordset.length; i++) {
@@ -228,10 +218,8 @@ module.exports = (app) => {
                     lat: res[0].latlng[0],
                     lng: res[0].latlng[1]
                 });
-                console.log(ret[i]);
             }
             for (var i = 0; i < ret.length; i++) {
-                console.log(ret[i]);
                 execSQL("update Paises " +
                     "set bandeira='" + ret[i].bandeira + "', " +
                     "moeda='" + ret[i].moeda + "', " +
@@ -326,7 +314,6 @@ module.exports = (app) => {
     });
 
     app.get("/api/cidades/pais/:busc", function (req, resp) {
-        console.log("entrou");
         var ret = [];
         var busc = req.params.busc;
         conexao.query(
@@ -340,17 +327,14 @@ module.exports = (app) => {
                         codAPI: Number(result.recordset[i].codAPI),
                         foto: result.recordset[i].foto,
                         idPais: result.recordset[i].idPais,
-                        estado:result.recordset[i].estado
+                        estado: result.recordset[i].estado
                     });
-
-                    console.log(ret[i]);
                 }
                 resp.send(ret);
             });
     });
 
     app.get("/api/cidades/pais/insert/:idPais", function (req, resp) {
-        console.log("entrou");
         var ret = [];
         var busc = req.params.idPais;
         conexao.query(
@@ -370,7 +354,6 @@ module.exports = (app) => {
                     );
 
                     res = JSON.parse(res.body.toString("utf-8")).data[0].result_object;
-                    // console.log(res);
                     ret.push({
                         id: result.recordset[i].id,
                         nome: result.recordset[i].nome,
@@ -381,69 +364,159 @@ module.exports = (app) => {
                     });
 
                     execSQL("update Cidades " +
-                    "set estado='" + ret[i].estado + "', " +
-                    "foto='" + ret[i].foto  + "', " +
-                    "codAPI =" + ret[i].codAPI
-                    + " where nome='" + result.recordset[i].nome + "'");
+                        "set estado='" + ret[i].estado + "', " +
+                        "foto='" + ret[i].foto + "', " +
+                        "codAPI =" + ret[i].codAPI
+                        + " where nome='" + result.recordset[i].nome + "'");
 
                 }
                 resp.send(ret);
             });
     });
 
-    app.get("/api/pais/atracoes/:busc", function (req, res) {
+    app.get("/api/cidade/hoteis/:busc", function (req, resp) {
         var busc = req.params.busc;
-        var res = sync(
-            "GET",
-            "https://tripadvisor1.p.rapidapi.com/attractions/list?location_id=" +
-            busc, {
-            headers: {
-                "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "23df1f685dmshd882459ff3ac6b1p1f63cdjsn9329a5dafe02",
-                useQueryString: true,
-            },
-        }
-        );
-        var ret = [];
-        res = JSON.parse(res.body.toString("utf-8"))
-        for (var i = 0; i < 5; i++) {
-            linha = res.data[i];
-            ret.push({
-                nome: linha.name,
-                url: linha.web_url,
-                foto: linha.photo.images.original.url
-            });
-        }
-        //  console.log(ret);
-        return ret;
+        conexao.query("select * from hoteis where idCidade=" + busc, (err, result) => {
+            resp.send(result.recordset);
+        });
     });
 
-    app.get("/api/pais/atra/:busc", function (req, res) {
+    app.get("/api/cidade/pontos/:busc", function (req, resp) {
         var busc = req.params.busc;
+        conexao.query("select * from pontos where idCidade=" + busc, (err, result) => {
+            resp.send(result.recordset);
+        });
+    });
 
-        var res = sync(
-            "GET",
-            "https://tripadvisor1.p.rapidapi.com/attractions/list?location_id=" +
-            busc, {
-            headers: {
-                "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "23df1f685dmshd882459ff3ac6b1p1f63cdjsn9329a5dafe02",
-                useQueryString: true,
-            },
-        }
-        );
-        var ret = [];
-        res = JSON.parse(res.body.toString("utf-8"))
-        for (var i = 0; i < 5; i++) {
-            linha = res.data[i];
-            ret.push({
-                nome: linha.name,
-                url: linha.web_url,
-                foto: linha.photo.images.original.url
-            });
-        }
-        //console.log(ret);
-        return ret;
+    app.get("/api/cidade/restaurantes/:busc", function (req, resp) {
+        var busc = req.params.busc;
+        conexao.query("select * from restaurantes where idCidade=" + busc, (err, result) => {
+            resp.send(result.recordset);
+        });
+    });
+
+
+
+
+    app.get("/api/cidade/atracoes/inserir", function (req, resp) {
+        conexao.query("select * from cidades", (err, result) => {
+            for (var i = 0; i < result.rowsAffected; i++) {
+
+                var res = sync(
+                    "GET",
+                    "https://tripadvisor1.p.rapidapi.com/attractions/list?location_id=" +
+                    result.recordset[i].codAPI, {
+                    headers: {
+                        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+                        "x-rapidapi-key": "23df1f685dmshd882459ff3ac6b1p1f63cdjsn9329a5dafe02",
+                        useQueryString: true,
+                    },
+                });
+
+                res = JSON.parse(res.body.toString("utf-8"))
+                for (var a = 0; a < 5; a++) {
+                    if (res.data[a] == undefined)
+                        continue;
+                    if (res.data[a].photo == undefined)
+                        res.data[a].photo = {
+                            images: {
+                                original: {
+                                    url: "https://vignette.wikia.nocookie.net/rato-royale/images/7/70/Remy.png/revision/latest?cb=20180323184048&path-prefix=pt-br"
+                                }
+                            }
+                        }
+
+                    execSQL("insert into Pontos values(" +
+                        result.recordset[i].id + ",'" +
+                        res.data[a].name + "','" +
+                        res.data[a].web_url + "', '" +
+                        res.data[a].photo.images.original.url + "')"
+                    );
+
+                }
+                console.log("FOI A " + i + "ª CIDADE")
+            }
+        });
+
+    });
+
+    app.get("/api/cidade/restaurantes/inserir", function (req, resp) {
+        conexao.query("select * from cidades where id>21", (err, result) => {
+            for (var i = 0; i < 4; i++) {
+                var res = sync(
+                    "GET",
+                    "https://tripadvisor1.p.rapidapi.com/restaurants/list?location_id=" +
+                    result.recordset[i].codAPI, {
+                    headers: {
+                        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+                        "x-rapidapi-key": "23df1f685dmshd882459ff3ac6b1p1f63cdjsn9329a5dafe02",
+                        useQueryString: true,
+                    },
+                }
+                );
+                res = JSON.parse(res.body.toString("utf-8"))
+                for (var a = 0; a < 5; a++) {
+                    if (res.data[a] == undefined)
+                        continue;
+                    if (res.data[a].photo == undefined)
+                        res.data[a].photo = {
+                            images: {
+                                original: {
+                                    url: "https://vignette.wikia.nocookie.net/rato-royale/images/7/70/Remy.png/revision/latest?cb=20180323184048&path-prefix=pt-br"
+                                }
+                            }
+                        }
+                    execSQL("insert into Restaurantes values(" +
+                        result.recordset[i].id + ",'" +
+                        res.data[a].name + "','" +
+                        res.data[a].web_url + "', '" +
+                        res.data[a].photo.images.original.url + "')"
+                    );
+                }
+                console.log("FOI A " + i + "ª CIDADE");
+            }
+        });
+    });
+
+    app.get("/api/cidade/hoteis/inserir", function (req, resp) {
+        var data = new Date();
+        conexao.query("select * from cidades where id>24", (err, result) => {
+            for (var i = 0; i < 1; i++) {
+                var res = sync(
+                    "GET",
+                    "    https://tripadvisor1.p.rapidapi.com/hotels/list?location_id=" + result.recordset[i].codAPI + "&adults=1&checkin=" + data.getFullYear() + "-" + data.getMonth() + "-" + data.getDate() + 1 + "&rooms=1&nights=2&sort=recommended"
+                    , {
+                        headers: {
+                            "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+                            "x-rapidapi-key": "23df1f685dmshd882459ff3ac6b1p1f63cdjsn9329a5dafe02",
+                            useQueryString: true,
+                        }
+                    }
+                );
+
+                res = JSON.parse(res.body.toString("utf-8"))
+                for (var a = 0; a < 5; a++) {
+                    if (res.data[a] == undefined)
+                        continue;
+                    if (res.data[a].photo == undefined)
+                        res.data[a].photo = {
+                            images: {
+                                original: {
+                                    url: "https://vignette.wikia.nocookie.net/rato-royale/images/7/70/Remy.png/revision/latest?cb=20180323184048&path-prefix=pt-br"
+                                }
+                            }
+                        }
+                    execSQL("insert into Hoteis values(" +
+                        result.recordset[i].id + ",'" +
+                        res.data[a].name + "','" +
+                        res.data[a].price + "', '" +
+                        res.data[a].rating + "', '" +
+                        res.data[a].photo.images.original.url + "')"
+                    );
+                }
+                console.log("FOI A " + i + "ª CIDADE");
+            }
+        });
     });
 
     app.get("/api/paises/continente/:nome", function (req, resp) {
@@ -487,8 +560,6 @@ module.exports = (app) => {
     app.get("/api/paises/favoritos/checar/:idPais/:idUsuario", function (req, resp) {
         const idUsuario = req.params.idUsuario;
         const idPais = req.params.idPais;
-        console.log(idUsuario);
-        console.log(idPais);
         conexao.query(`select * from favoritos where idUsuario =${idUsuario} and idPais = ${idPais}`, (err, result) => {
             if (result.rowsAffected[0] == 1) {
                 console.log("deu true");
@@ -504,4 +575,5 @@ module.exports = (app) => {
         const idPais = requisicao.params.idPais;
         execSQL(`insert into Favoritos values(${idUsuario}, ${idPais})`, resposta);
     });
+
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+
+import cotuca.aplicativo.viaxar.dbos.Atracao;
+import cotuca.aplicativo.viaxar.dbos.Hotel;
 import cotuca.aplicativo.viaxar.dbos.Pais;
 import cotuca.aplicativo.viaxar.dbos.Cidade;
 import retrofit.Call;
@@ -27,8 +31,14 @@ import retrofit.Retrofit;
 public class PaisActivity extends AppCompatActivity {
 
     List<Cidade> listaCidades;
-    TextView descricao, capital, lingua, moeda, populacao, clima, religiao, lgbt, nome, estado;
+    List<Atracao> listaPontos;
+    List<Atracao> listaRestaurantes;
+    List<Hotel> listaHoteis;
+    AtracoesAdapter atracoesAdapter;
+    HotelAdapter hotelAdapter;
+    TextView descricao, capital, lingua, moeda, populacao, clima, religiao, lgbt, nome, estado,cidadeNome;
     Button btn1, btn2, btn3;
+    ListView lvPontos,lvRestaurantes,lvHoteis;
     ImageView imgCidade;
     boolean ehFavorito;
 
@@ -67,6 +77,10 @@ public class PaisActivity extends AppCompatActivity {
             }
         });
 
+        lvHoteis = (ListView) findViewById(R.id.lvHoteis);
+        lvPontos = (ListView) findViewById(R.id.lvPontosTuristicos);
+        lvRestaurantes = (ListView) findViewById(R.id.lvRestaurantes);
+
         nome = (TextView) findViewById(R.id.nome_pais);
         descricao = (TextView) findViewById(R.id.descricao);
         capital = (TextView) findViewById(R.id.tvCapital);
@@ -86,13 +100,18 @@ public class PaisActivity extends AppCompatActivity {
         btn3 = (Button)findViewById(R.id.btnCidade3);
         estado = (TextView)findViewById(R.id.tvEstado);
         imgCidade = (ImageView)findViewById(R.id.imgCidade);
+        cidadeNome = (TextView)findViewById(R.id.tvCidadeNome);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cidade cidade = listaCidades.get(0);
                 estado.setText(cidade.getEstado());
+                cidadeNome.setText(cidade.getNome());
                 imgCidade.setImageBitmap(cidade.getImagem());
+                consultarRestaurantes(cidade.getId());
+                consultarPontos(cidade.getId());
+                consultarHoteis(cidade.getId());
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +119,11 @@ public class PaisActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Cidade cidade = listaCidades.get(1);
                 estado.setText(cidade.getEstado());
+                cidadeNome.setText(cidade.getNome());
                 imgCidade.setImageBitmap(cidade.getImagem());
+                consultarRestaurantes(cidade.getId());
+                consultarPontos(cidade.getId());
+                consultarHoteis(cidade.getId());
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -108,12 +131,16 @@ public class PaisActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Cidade cidade = listaCidades.get(2);
                 estado.setText(cidade.getEstado());
+                cidadeNome.setText(cidade.getNome());
                 imgCidade.setImageBitmap(cidade.getImagem());
+                consultarRestaurantes(cidade.getId());
+                consultarPontos(cidade.getId());
+                consultarHoteis(cidade.getId());
             }
         });
     }
 
-    private class MyTask extends AsyncTask<String, String, List<Cidade>> {
+    private class TaskCidade extends AsyncTask<String, String, List<Cidade>> {
 
         @Override
         protected void onPreExecute() {
@@ -142,6 +169,112 @@ public class PaisActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Cidade> s) {
             btn1.callOnClick();
+            //setListViewHeightBasedOnChildren(lvPais);
+            //progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private class TaskPontos extends AsyncTask<String, String, List<Atracao>> {
+        @Override
+        protected void onPreExecute() {
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Atracao> doInBackground(String... params) {
+            try {
+                for (Atracao atracao : listaPontos) {
+
+                    String urlFoto = atracao.getImagem();
+
+                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                    atracao.setImagemBitmap(bitmapFoto);
+
+                    inputImagem.close();
+                }
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+            return listaPontos;
+        }
+
+        @Override
+        protected void onPostExecute(List<Atracao> s) {
+            //adapter aqui
+            atracoesAdapter = new AtracoesAdapter(getBaseContext(), R.layout.card_atracoes, listaPontos);
+            lvPontos.setAdapter(atracoesAdapter);
+
+             //setListViewHeightBasedOnChildren(lvPais);
+            //progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private class TaskRestaurantes extends AsyncTask<String, String, List<Atracao>> {
+        @Override
+        protected void onPreExecute() {
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Atracao> doInBackground(String... params) {
+            try {
+                for (Atracao atracao : listaRestaurantes) {
+
+                    String urlFoto = atracao.getImagem();
+
+                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                    atracao.setImagemBitmap(bitmapFoto);
+
+                    inputImagem.close();
+                }
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+            return listaRestaurantes;
+        }
+
+        @Override
+        protected void onPostExecute(List<Atracao> s) {
+            //adapter aqui
+            atracoesAdapter = new AtracoesAdapter(getBaseContext(), R.layout.card_atracoes, listaRestaurantes);
+            lvRestaurantes.setAdapter(atracoesAdapter);
+            //setListViewHeightBasedOnChildren(lvPais);
+            //progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private class TaskHoteis extends AsyncTask<String, String, List<Hotel>> {
+        @Override
+        protected void onPreExecute() {
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Hotel> doInBackground(String... params) {
+            try {
+                for (Hotel hotel : listaHoteis) {
+
+                    String urlFoto = hotel.getImagem();
+
+                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                    hotel.setImagemBitmap(bitmapFoto);
+
+                    inputImagem.close();
+                }
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+            return listaHoteis;
+        }
+
+        @Override
+        protected void onPostExecute(List<Hotel> s) {
+            //adapter aqui
+            hotelAdapter = new HotelAdapter(getBaseContext(), R.layout.card_atracoes, listaHoteis);
+            lvHoteis.setAdapter(hotelAdapter);
             //setListViewHeightBasedOnChildren(lvPais);
             //progressBar.setVisibility(View.INVISIBLE);
         }
@@ -206,6 +339,84 @@ public class PaisActivity extends AppCompatActivity {
         });
     }
 
+    public void consultarPontos(int idCidade){
+        // Classe Call é usada p/ executar a solicitação à API
+        Call<List<Atracao>> call = new RetrofitConfig().getService().selecionarPontos(idCidade);
+        call.enqueue(new Callback<List<Atracao>>() {
+            @Override
+            public void onResponse(Response<List<Atracao>> response, Retrofit retrofit) {
+                if(response.isSuccess()) //conectou com o node
+                {
+                    listaPontos = response.body();
+                    TaskPontos task = new TaskPontos();
+                    task.execute();
+                }
+                else {
+                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações dos pontos turísticos", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
+    public void consultarRestaurantes(int idCidade){
+        // Classe Call é usada p/ executar a solicitação à API
+        Call<List<Atracao>> call = new RetrofitConfig().getService().selecionarRestaurantes(idCidade);
+        call.enqueue(new Callback<List<Atracao>>() {
+            @Override
+            public void onResponse(Response<List<Atracao>> response, Retrofit retrofit) {
+                if(response.isSuccess()) //conectou com o node
+                {
+                    listaRestaurantes = response.body();
+                    TaskRestaurantes task = new TaskRestaurantes();
+                    task.execute();
+                }
+                else {
+                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações dos restaurantes", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
+    public void consultarHoteis(int idCidade){
+        // Classe Call é usada p/ executar a solicitação à API
+        Call<List<Hotel>> call = new RetrofitConfig().getService().selecionarHoteis(idCidade);
+        call.enqueue(new Callback<List<Hotel>>() {
+            @Override
+            public void onResponse(Response<List<Hotel>> response, Retrofit retrofit) {
+                if(response.isSuccess()) //conectou com o node
+                {
+                    listaHoteis = response.body();
+                    TaskHoteis task = new TaskHoteis();
+                    task.execute();
+                }
+                else {
+                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações dos hoteis", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
     public void checarFavorito(int idPais, int idUsuario){
         // Classe Call é usada p/ executar a solicitação à API
 
@@ -213,13 +424,8 @@ public class PaisActivity extends AppCompatActivity {
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Response<Boolean> response, Retrofit retrofit) {
-                if(response.isSuccess()) //conectou com o node
-                {
-                    if(response.body())
-                        Toast.makeText(getApplication(), "FIOIOIO", Toast.LENGTH_LONG).show();
-                     //   fav.setBackgroundResource(R.drawable.red_fav);
-                }
-                else {
+                if(!response.isSuccess())
+                {//conectou com o node
                     Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações deste país", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -242,7 +448,7 @@ public class PaisActivity extends AppCompatActivity {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaCidades = response.body();
-                    MyTask task = new MyTask();
+                    TaskCidade task = new TaskCidade();
                     task.execute();
                 }
                 else {

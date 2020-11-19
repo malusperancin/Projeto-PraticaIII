@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="200dp">
+
+    <ImageView
+        android:id="@+id/imgHotel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/preto"/>
+
+    <TextView
+        android:id="@+id/tvNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="Hotel Legal"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="12dp" />
+
+    <TextView
+        android:id="@+id/tvPreco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:text="$75 - $120"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="12dp" />
+
+    <TextView
+        android:id="@+id/tvAvaliacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="⭐"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="12dp" />
+
+</RelativeLayout>
