@@ -58,8 +58,11 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
 
         final Pais pais = dados.get(position);
 
-        imgPais.setImageBitmap(pais.getImagem());
-        imgBandeira.setImageBitmap(pais.getImagemBandeira());
+        if(pais.getImagem()!= null)
+        {
+            imgPais.setImageBitmap(pais.getImagem());
+            imgBandeira.setImageBitmap(pais.getImagemBandeira());
+        }
         tvNome.setText(pais.getNome());
         tvContinente.setText(pais.getContinente());
 

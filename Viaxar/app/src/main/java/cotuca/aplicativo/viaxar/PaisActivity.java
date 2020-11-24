@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,13 +19,16 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import cotuca.aplicativo.viaxar.dbos.Atracao;
 import cotuca.aplicativo.viaxar.dbos.Hotel;
 import cotuca.aplicativo.viaxar.dbos.Pais;
 import cotuca.aplicativo.viaxar.dbos.Cidade;
+import cotuca.aplicativo.viaxar.dbos.Usuario;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -41,10 +47,13 @@ public class PaisActivity extends AppCompatActivity {
     ListView lvPontos,lvRestaurantes,lvHoteis;
     ImageView imgCidade;
     boolean ehFavorito;
+    HashMap<String, String> user;
 
     ImageView back, fav;
     SessionManager session;
     Pais pais;
+
+    private LruCache<String, Bitmap> imgCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +62,20 @@ public class PaisActivity extends AppCompatActivity {
 
         session = new SessionManager(this);
 
-        final HashMap<String, String> user = session.getUserDetail();
+        user = session.getUserDetail();
 
         Intent intent = getIntent();
         Bundle params = intent.getExtras();
         final int id = params.getInt("idPais");
 
+        int maxMemory = (int)(Runtime.getRuntime().maxMemory()/1024);
+        int cacheSize = maxMemory/8;
+        imgCache = new LruCache<>(cacheSize);
+
         back = (ImageView) findViewById(R.id.imgBack);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //Toast.makeText(getApplication(), "Entro", Toast.LENGTH_LONG).show();
                finish();
             }
         });
@@ -72,8 +84,18 @@ public class PaisActivity extends AppCompatActivity {
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adicionarAosFavoritos();
-                checarFavorito(Integer.parseInt(user.get(session.ID)),id);
+                ehFavorito = !ehFavorito;
+                if(ehFavorito)
+                {
+                    adicionarAosFavoritos();
+                    fav.setImageDrawable(getResources().getDrawable(R.drawable.sim_fav));
+                }
+                else
+                {
+                    removerDosFavoritos();
+                    fav.setImageDrawable(getResources().getDrawable(R.drawable.nao_fav));
+                }
+
             }
         });
 
@@ -106,14 +128,17 @@ public class PaisActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Cidade cidade = listaCidades.get(0);
+
                 estado.setText(cidade.getEstado());
                 cidadeNome.setText(cidade.getNome());
                 imgCidade.setImageBitmap(cidade.getImagem());
+
                 consultarRestaurantes(cidade.getId());
                 consultarPontos(cidade.getId());
                 consultarHoteis(cidade.getId());
             }
         });
+
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +165,36 @@ public class PaisActivity extends AppCompatActivity {
         });
     }
 
+    public void setPontos(List<Hotel> hoteis, List<Atracao> restaurantes, List<Atracao> pontos)
+    {
+        Random rand = new Random();
+        int aleatorio = rand.nextInt(3);
+
+        if(hoteis != null) {
+            List<Hotel>lista = new ArrayList<Hotel>();
+            lista.add(hoteis.get(aleatorio));
+
+            hotelAdapter = new HotelAdapter(getBaseContext(), R.layout.hotel_item, lista);
+            lvHoteis.setAdapter(hotelAdapter);
+        }
+
+        if(restaurantes != null) {
+            List<Atracao>lista = new ArrayList<Atracao>();
+            lista.add(restaurantes.get(aleatorio));
+
+            atracoesAdapter = new AtracoesAdapter(getBaseContext(), R.layout.card_atracoes, lista);
+            lvRestaurantes.setAdapter(atracoesAdapter);
+        }
+
+        if(pontos != null) {
+            List<Atracao>lista = new ArrayList<Atracao>();
+            lista.add(pontos.get(aleatorio));
+
+            atracoesAdapter = new AtracoesAdapter(getBaseContext(), R.layout.card_atracoes, lista);
+            lvPontos.setAdapter(atracoesAdapter);
+        }
+    }
+
     private class TaskCidade extends AsyncTask<String, String, List<Cidade>> {
 
         @Override
@@ -152,13 +207,21 @@ public class PaisActivity extends AppCompatActivity {
             try {
                 for (Cidade cidade : listaCidades) {
 
-                    String urlFoto = cidade.getFoto();
+                    Bitmap bitmapCache = imgCache.get(cidade.getNome());
 
-                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
-                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
-                    cidade.setImagem(bitmapFoto);
+                    if (bitmapCache != null)
+                        cidade.setImagem(bitmapCache);
+                    else {
+                        String urlFoto = cidade.getFoto();
 
-                    inputImagem.close();
+                        InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                        Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                        cidade.setImagem(bitmapFoto);
+
+                        inputImagem.close();
+
+                        imgCache.put(cidade.getNome(), bitmapFoto);
+                    }
                 }
             } catch (Exception err) {
                 err.printStackTrace();
@@ -185,13 +248,22 @@ public class PaisActivity extends AppCompatActivity {
             try {
                 for (Atracao atracao : listaPontos) {
 
-                    String urlFoto = atracao.getImagem();
+                    Bitmap bitmapCache = imgCache.get(atracao.getNome());
 
-                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
-                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
-                    atracao.setImagemBitmap(bitmapFoto);
+                    if (bitmapCache != null)
+                        atracao.setImagemBitmap(bitmapCache);
+                    else
+                    {
+                        String urlFoto = atracao.getImagem();
 
-                    inputImagem.close();
+                        InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                        Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                        atracao.setImagemBitmap(bitmapFoto);
+
+                        inputImagem.close();
+
+                        imgCache.put(atracao.getNome(), bitmapFoto);
+                    }
                 }
             } catch (Exception err) {
                 err.printStackTrace();
@@ -202,8 +274,7 @@ public class PaisActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Atracao> s) {
             //adapter aqui
-            atracoesAdapter = new AtracoesAdapter(getBaseContext(), R.layout.card_atracoes, listaPontos);
-            lvPontos.setAdapter(atracoesAdapter);
+            setPontos(null, null, s);
 
              //setListViewHeightBasedOnChildren(lvPais);
             //progressBar.setVisibility(View.INVISIBLE);
@@ -220,14 +291,21 @@ public class PaisActivity extends AppCompatActivity {
         protected List<Atracao> doInBackground(String... params) {
             try {
                 for (Atracao atracao : listaRestaurantes) {
+                    Bitmap bitmapCache = imgCache.get(atracao.getNome());
 
-                    String urlFoto = atracao.getImagem();
+                    if (bitmapCache != null)
+                        atracao.setImagemBitmap(bitmapCache);
+                    else {
+                        String urlFoto = atracao.getImagem();
 
-                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
-                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
-                    atracao.setImagemBitmap(bitmapFoto);
+                        InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                        Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                        atracao.setImagemBitmap(bitmapFoto);
 
-                    inputImagem.close();
+                        inputImagem.close();
+
+                        imgCache.put(atracao.getNome(), bitmapFoto);
+                    }
                 }
             } catch (Exception err) {
                 err.printStackTrace();
@@ -238,8 +316,7 @@ public class PaisActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Atracao> s) {
             //adapter aqui
-            atracoesAdapter = new AtracoesAdapter(getBaseContext(), R.layout.card_atracoes, listaRestaurantes);
-            lvRestaurantes.setAdapter(atracoesAdapter);
+            setPontos(null, s, null);
             //setListViewHeightBasedOnChildren(lvPais);
             //progressBar.setVisibility(View.INVISIBLE);
         }
@@ -255,14 +332,21 @@ public class PaisActivity extends AppCompatActivity {
         protected List<Hotel> doInBackground(String... params) {
             try {
                 for (Hotel hotel : listaHoteis) {
+                    Bitmap bitmapCache = imgCache.get(hotel.getNome());
 
-                    String urlFoto = hotel.getImagem();
+                    if (bitmapCache != null)
+                        hotel.setImagemBitmap(bitmapCache);
+                    else {
+                        String urlFoto = hotel.getImagem();
 
-                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
-                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
-                    hotel.setImagemBitmap(bitmapFoto);
+                        InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                        Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                        hotel.setImagemBitmap(bitmapFoto);
 
-                    inputImagem.close();
+                        inputImagem.close();
+
+                        imgCache.put(hotel.getNome(), bitmapFoto);
+                    }
                 }
             } catch (Exception err) {
                 err.printStackTrace();
@@ -272,31 +356,41 @@ public class PaisActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Hotel> s) {
-            //adapter aqui
-            hotelAdapter = new HotelAdapter(getBaseContext(), R.layout.card_atracoes, listaHoteis);
-            lvHoteis.setAdapter(hotelAdapter);
-            //setListViewHeightBasedOnChildren(lvPais);
-            //progressBar.setVisibility(View.INVISIBLE);
+            setPontos(s, null, null);
         }
     }
 
+    public void removerDosFavoritos()
+        {
+            Call<Usuario> call = new RetrofitConfig().getService().excluirFavorito(Integer.parseInt(user.get(session.ID)),pais.getId());
+            call.enqueue(new Callback<Usuario>() {
+                @Override
+                public void onResponse(Response<Usuario> response, Retrofit retrofit) {
+                    if (!response.isSuccess()) //conectou com o node
+                        Toast.makeText(getApplication(), "Ocorreu um erro ao excluir o pais fav", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+
     public void adicionarAosFavoritos(){
         // Classe Call é usada p/ executar a solicitação à API
-        Call<Pais> call = new RetrofitConfig().getService().adicionarPaisFavoritos(pais,  Integer.parseInt(session.getUserDetail().get(session.ID)));
+        Call<Pais> call = new RetrofitConfig().getService().adicionarPaisFavoritos(Integer.parseInt(session.getUserDetail().get(session.ID)),pais.getId());
         call.enqueue(new Callback<Pais>() {
             @Override
             public void onResponse(Response<Pais> response, Retrofit retrofit) {
-                if(response.isSuccess()) //conectou com o node
-                {
-                    //COLOCAR CORAÇÃO VERMELHO
-                }
-                else
+                if(!response.isSuccess()) //conectou com o node
                     Toast.makeText(getApplication(), "Erro ao adicionar esse país aos favoritos", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), "Ocorreu erro na rede", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -359,7 +453,8 @@ public class PaisActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), "" +
+                        "", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -424,11 +519,18 @@ public class PaisActivity extends AppCompatActivity {
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Response<Boolean> response, Retrofit retrofit) {
-                if(!response.isSuccess())
-                {//conectou com o node
+                if (response.isSuccess()) {
+                    ehFavorito = response.body();
+                    if(ehFavorito)
+                        fav.setImageDrawable(getResources().getDrawable(R.drawable.sim_fav));
+                    else
+                        fav.setImageDrawable(getResources().getDrawable(R.drawable.nao_fav));
+                }
+                else {
                     Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações deste país", Toast.LENGTH_LONG).show();
                     finish();
                 }
+
             }
 
             @Override

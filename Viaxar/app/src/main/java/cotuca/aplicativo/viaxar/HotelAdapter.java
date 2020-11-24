@@ -55,7 +55,7 @@ public class HotelAdapter extends ArrayAdapter<Hotel> {
         imgHotel.setImageBitmap(hotel.getImagemBitmap());
         tvNome.setText(hotel.getNome());
         tvPreco.setText(hotel.getPreco());
-        tvAvaliacao.append(" "+hotel.getAvaliacao());
+        tvAvaliacao.setText("⭐ "+hotel.getAvaliacao());
 
         return view;
     }

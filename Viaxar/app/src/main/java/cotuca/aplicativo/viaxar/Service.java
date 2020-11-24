@@ -46,8 +46,8 @@ public interface Service {
     @GET("paises/favoritos/{id}")
     Call<List<Pais>> selecionarFavs(@Path("id") int id);
 
-    @POST("paises/favoritos/adicionar/:idUsuario")
-    Call<Pais> adicionarPaisFavoritos(@Body Pais pais, @Path("idUsuario") int id);
+    @POST("usuario/favoritar/{idUsuario}/{idPais}")
+    Call<Pais> adicionarPaisFavoritos(@Path("idUsuario") int idUsuario, @Path("idPais") int idPais);
 
     @GET("paises/continente/{continente}")
     Call<List<Pais>> selecionarPaisesContinente(@Path("continente") String continente);

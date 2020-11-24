@@ -6,7 +6,7 @@ function execSQL(sql, resposta) {
     global.conexao
         .request()
         .query(sql)
-        .then((resultado) => console.log("ok"))
+        .then((resultado) => resposta.send(resultado))
         .catch((erro) => console.log(erro));
 }
 
@@ -101,32 +101,10 @@ module.exports = (app) => {
 
     app.get("/api/paises/favoritos/:id", function (req, resp) {
         var idUsuario = req.params.id;
-        var paises;
         conexao.query(`select p.* from Favoritos f, Paises p where f.idUsuario=${idUsuario} and f.idPais=p.id`, (err, result) => {
             if (result.recordset[0] == undefined)
-                console.log("nao tem favs");
-            paises = result.recordset;
-            for (var i = 0; i < paises.length; i++) {
-                var res = sync(
-                    "GET",
-                    "https://restcountries.eu/rest/v2/name/" +
-                    result.recordset[i].nome.toLowerCase()
-                );
-                res = JSON.parse(res.body.toString("utf-8"));
-                paises[i].bandeira = "https://www.countryflags.io/" + res[0].alpha2Code + "/flat/64.png";
-                paises[i].idioma = res[0].languages[0].name;
-                paises[i].continente = res[0].region;
-                paises[i].moeda =
-                    res[0].currencies[0].name + " (" + res[0].currencies[0].symbol + ")";
-                paises[i].populacao = res[0].population;
-                paises[i].clima = result.recordset[i].clima;
-                paises[i].sigla = res[0].alpha3Code;
-                paises[i].capital = res[0].capital;
-                paises[i].ddd = res[0].callingCodes[0];
-                paises[i].lat = res[0].latlng[0];
-                paises[i].lng = res[0].latlng[1];
-            }
-            resp.send(paises);
+                resp.send(null);
+            resp.send(result.recordset);
         })
     });
 
@@ -561,10 +539,8 @@ module.exports = (app) => {
         const idUsuario = req.params.idUsuario;
         const idPais = req.params.idPais;
         conexao.query(`select * from favoritos where idUsuario =${idUsuario} and idPais = ${idPais}`, (err, result) => {
-            if (result.rowsAffected[0] == 1) {
-                console.log("deu true");
+            if (result.rowsAffected[0] == 1) 
                 resp.send(true);
-            }
             else
                 resp.send(false);
         });

@@ -367,22 +367,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10sp"
-                        android:text="City:"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
                         android:id="@+id/tvCidadeNome"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5sp"
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp" />
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
 
                 </LinearLayout>
 
@@ -390,72 +382,53 @@
                     android:id="@+id/tvPontosTuristicos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" Attractions"
-                    android:textAlignment="center"
+                    android:text="Attractions"
+                    android:layout_margin="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginTop="7dp"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
 
-                <ScrollView
+                <ListView
+                    android:id="@+id/lvPontosTuristicos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ListView
-                            android:id="@+id/lvPontosTuristicos"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                </ScrollView>
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="10dp"/>
 
                 <TextView
                     android:id="@+id/tvRestaurantes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Restaurants"
-                    android:textAlignment="center"
+                    android:layout_margin="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginTop="7dp"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    />
 
-                <ScrollView
+                <ListView
+                    android:id="@+id/lvRestaurantes"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ListView
-                            android:id="@+id/lvRestaurantes"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                </ScrollView>
-
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="10dp"/>
 
                 <TextView
                     android:id="@+id/tvHoteis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hotels"
-                    android:textAlignment="center"
+                    android:layout_margin="5dp"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
 
-                <ScrollView
+                <ListView
+                    android:id="@+id/lvHoteis"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ListView
-                            android:id="@+id/lvHoteis"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
-                </ScrollView>
-
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="10dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

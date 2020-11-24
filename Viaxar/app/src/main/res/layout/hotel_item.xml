@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="200dp">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:elevation="2dp"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    app:cardCornerRadius="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tableborder">
+
 
     <ImageView
         android:id="@+id/imgHotel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/preto"/>
+        android:background="@drawable/preto" />
 
     <TextView
         android:id="@+id/tvNome"
@@ -19,23 +32,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:text="Hotel Legal"
-        android:textColor="@android:color/white"
-        android:textSize="22dp"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="12dp" />
+        android:paddingVertical="12dp"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvPreco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:text="$75 - $120"
-        android:textColor="@android:color/white"
-        android:textSize="22dp"
+        android:layout_alignParentTop="true"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="12dp" />
+        android:paddingVertical="12dp"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvAvaliacao"
@@ -45,8 +58,8 @@
         android:layout_alignParentRight="true"
         android:text="⭐"
         android:textColor="@android:color/white"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:paddingHorizontal="15dp"
         android:paddingVertical="12dp" />
-
-</RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

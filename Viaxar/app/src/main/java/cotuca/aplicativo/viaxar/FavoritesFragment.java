@@ -57,6 +57,7 @@ public class FavoritesFragment extends Fragment {
         user = session.getUserDetail();
         Call<List<Pais>> call = new RetrofitConfig().getService().selecionarFavs(Integer.parseInt(user.get(session.ID)));
         call.enqueue(new Callback<List<Pais>>() {
+
             @Override
             public void onResponse(Response<List<Pais>> response, Retrofit retrofit) {
                 if(response.isSuccess()) //conectou com o node
@@ -64,7 +65,6 @@ public class FavoritesFragment extends Fragment {
                     listaPais = response.body();
                     MyTask task = new MyTask();
                     task.execute();
-                    //atualizarView();
                 }
                 else
                     Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();
@@ -79,7 +79,6 @@ public class FavoritesFragment extends Fragment {
 
     private class MyTask extends AsyncTask<String, String, List<Pais>>
     {
-
         @Override
         protected List<Pais> doInBackground(String... params) {
             for(Pais pais:listaPais){

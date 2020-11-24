@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,10 +44,16 @@ public class HomeFragment extends Fragment {
     PaisHomeAdapter adapter;
     TextView tvIndicador;
 
+    private LruCache<String, Bitmap> imgCache;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        int maxMemory = (int)(Runtime.getRuntime().maxMemory()/1024);
+        int cacheSize = maxMemory/8;
+        imgCache = new LruCache<>(cacheSize);
 
         listaPais = new ArrayList<Pais>();
         lvPais = (ListView) root.findViewById(R.id.lvPaises);
@@ -65,7 +72,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         tvIndicador = (TextView) root.findViewById(R.id.tvIndicador);
 
@@ -121,9 +127,8 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaPais = response.body();
-                    MyTask task = new MyTask();
-                    task.execute(); //listaPais);
-                    //atualizarView();
+                    //MyTask task = new MyTask();
+                    //task.execute();
                 }
                 else
                     Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises", Toast.LENGTH_LONG).show();
@@ -147,20 +152,27 @@ public class HomeFragment extends Fragment {
         protected List<Pais> doInBackground(String... params) {
             try {
                 for (Pais pais : listaPais) {
+                    Bitmap bitmapCache = imgCache.get(pais.getNome());
 
-                    String urlFoto = pais.getFoto();
-                    String urlBandeira = pais.getBandeira();
+                    if (bitmapCache != null)
+                        pais.setImagem(bitmapCache);
+                    else {
+                        String urlFoto = pais.getFoto();
+                        String urlBandeira = pais.getBandeira();
 
-                    InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
-                    Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
-                    pais.setImagem(bitmapFoto);
+                        InputStream inputImagem = (InputStream) new URL(urlFoto).getContent();
+                        Bitmap bitmapFoto = BitmapFactory.decodeStream(inputImagem);
+                        pais.setImagem(bitmapFoto);
 
-                    InputStream inputBandeira = (InputStream) new URL(urlBandeira).getContent();
-                    Bitmap bitmapBandeira = BitmapFactory.decodeStream(inputBandeira);
-                    pais.setImagemBandeira(bitmapBandeira);
+                        InputStream inputBandeira = (InputStream) new URL(urlBandeira).getContent();
+                        Bitmap bitmapBandeira = BitmapFactory.decodeStream(inputBandeira);
+                        pais.setImagemBandeira(bitmapBandeira);
 
-                    inputImagem.close();
-                    inputBandeira.close();
+                        inputImagem.close();
+                        inputBandeira.close();
+
+                        imgCache.put(pais.getNome(), bitmapFoto);
+                    }
                 }
             } catch (Exception err) {
                 err.printStackTrace();
@@ -172,8 +184,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(List<Pais> s) {
             adapter = new PaisHomeAdapter(getActivity(), R.layout.pais_home, s);
             lvPais.setAdapter(adapter);
-            //setListViewHeightBasedOnChildren(lvPais);
-            //progressBar.setVisibility(View.INVISIBLE);
+            setListViewHeightBasedOnChildren(lvPais);
         }
     }
 
