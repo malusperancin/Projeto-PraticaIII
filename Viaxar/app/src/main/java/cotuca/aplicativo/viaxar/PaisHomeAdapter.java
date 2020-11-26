@@ -19,7 +19,7 @@ public class PaisHomeAdapter extends ArrayAdapter<Pais> {
     int layoutResourceId;
     List<Pais> dados;
     View view;
-    String continente;
+    String continente,nome;
 
     public PaisHomeAdapter (@NonNull Context context, int resource, @NonNull List<Pais> dados) {
         super(context, resource, dados);
@@ -54,7 +54,14 @@ public class PaisHomeAdapter extends ArrayAdapter<Pais> {
 
         imgPais.setImageBitmap(pais.getImagem());
         imgBandeira.setImageBitmap(pais.getImagemBandeira());
-        tvNome.setText(pais.getNome());
+
+        if(pais.getNome().equals("Federated States of Micronesia"))
+            tvNome.setText("Micronesia");
+        else
+        if(pais.getNome().equals("United Arab Emirates"))
+            tvNome.setText("Emirates");
+        else
+            tvNome.setText(pais.getNome());
 
         switch (pais.getContinente())
         {

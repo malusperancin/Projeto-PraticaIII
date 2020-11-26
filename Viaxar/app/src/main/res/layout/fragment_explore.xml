@@ -61,23 +61,25 @@
                 <ImageButton
                     android:id="@+id/btn_america"
                     android:layout_width="match_parent"
-                    android:layout_height="107dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/button_explore"
                     android:paddingTop="20dp"
                     android:paddingBottom="8dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/america"
-                    android:text="Button"
-                    android:layout_gravity="center"/>
+                    android:text="Button" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:clickable="false"
+                    android:padding="2dp"
                     android:text="America"
                     android:textColor="#000000"
-                    android:textStyle="bold"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </FrameLayout>
 
             <FrameLayout
@@ -88,23 +90,25 @@
                 <ImageButton
                     android:id="@+id/btn_europa"
                     android:layout_width="match_parent"
-                    android:layout_height="104dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/button_explore"
                     android:paddingTop="20dp"
                     android:paddingBottom="8dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/europe"
-                    android:text="Button"
-                    android:layout_gravity="center"/>
+                    android:text="Button" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:clickable="false"
+                    android:padding="2dp"
                     android:text="Europa"
                     android:textColor="#000000"
-                    android:textStyle="bold"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </FrameLayout>
         </TableRow>
 
@@ -121,21 +125,23 @@
                 <ImageButton
                     android:id="@+id/btn_africa"
                     android:layout_width="match_parent"
-                    android:layout_height="107dp"
+                    android:layout_height="130dp"
                     android:background="@drawable/button_explore"
                     android:paddingTop="20dp"
                     android:paddingBottom="8dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/africa"/>
+                    android:src="@drawable/africa" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:clickable="false"
+                    android:padding="2dp"
                     android:text="Africa"
                     android:textColor="#000000"
-                    android:textStyle="bold"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </FrameLayout>
 
             <FrameLayout
@@ -146,7 +152,7 @@
                 <ImageButton
                     android:id="@+id/btn_asia"
                     android:layout_width="match_parent"
-                    android:layout_height="107dp"
+                    android:layout_height="130dp"
                     android:background="@drawable/button_explore"
                     android:paddingTop="20dp"
                     android:paddingBottom="8dp"
@@ -159,9 +165,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:clickable="false"
+                    android:padding="2dp"
                     android:text="Asia"
                     android:textColor="#000000"
-                    android:textStyle="bold"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </FrameLayout>
         </TableRow>
 
@@ -178,7 +186,7 @@
                 <ImageButton
                     android:id="@+id/btn_oceania"
                     android:layout_width="175dp"
-                    android:layout_height="107dp"
+                    android:layout_height="130dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="10dp"
@@ -189,17 +197,19 @@
                     android:paddingBottom="8dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/australia"
-                    android:text="Button"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:text="Button"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:clickable="false"
+                    android:padding="2dp"
                     android:text="Oceania"
                     android:textColor="#000000"
-                    android:textStyle="bold"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </FrameLayout>
         </TableRow>
     </TableLayout>

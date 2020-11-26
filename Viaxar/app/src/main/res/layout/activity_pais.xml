@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#212121"
     android:orientation="vertical"
+    android:paddingBottom="10dp"
     tools:context=".PaisActivity">
 
 
@@ -71,7 +72,7 @@
                     android:foregroundGravity="right"
                     android:foregroundTint="#FFFFFF"
                     android:src="@drawable/ic_menu_favorite" />
-                
+
             </GridLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -87,78 +88,80 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout android:layout_height="match_parent"
-                android:layout_width="match_parent">
-            <androidx.cardview.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-20dp"
-                android:elevation="2dp"
-                android:padding="20sp"
-                app:cardBackgroundColor="@color/cinzaToolbar"
-                app:cardCornerRadius="20dp"
-                app:contentPadding="5dp">
+                android:layout_height="match_parent">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_marginTop="-20dp"
+                    android:elevation="2dp"
+                    android:padding="20sp"
+                    app:cardBackgroundColor="@color/cinzaToolbar"
+                    app:cardCornerRadius="20dp"
+                    app:contentPadding="5dp">
 
-                    <Button
-                        android:id="@+id/btnCidade1"
-                        android:layout_width="100dp"
-                        android:layout_height="25dp"
-                        android:layout_marginHorizontal="2sp"
-                        android:backgroundTint="#C8C8C8"
-                        android:text="" />
-
-                    <Button
-                        android:id="@+id/btnCidade2"
-                        android:layout_width="100dp"
-                        android:layout_height="25dp"
-                        android:layout_marginHorizontal="2sp"
-                        android:backgroundTint="#C8C8C8"
-                        android:text="" />
-
-                    <Button
-                        android:id="@+id/btnCidade3"
-                        android:layout_width="100dp"
-                        android:layout_height="25dp"
-                        android:layout_marginHorizontal="2sp"
-                        android:backgroundTint="#C8C8C8"
-                        android:text="" />
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="10sp"
-                    android:paddingTop="30dp">
-
-                    <ImageView
-                        android:id="@+id/imgCidade"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="167dp"
-                        android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/tvEstado"
+                        <Button
+                            android:id="@+id/btnCidade1"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:layout_marginHorizontal="2sp"
+                            android:backgroundTint="#C8C8C8"
+                            android:text="" />
+
+                        <Button
+                            android:id="@+id/btnCidade2"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:layout_marginHorizontal="2sp"
+                            android:backgroundTint="#C8C8C8"
+                            android:text="" />
+
+                        <Button
+                            android:id="@+id/btnCidade3"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:layout_marginHorizontal="2sp"
+                            android:backgroundTint="#C8C8C8"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imgCidade"
-                        android:layout_alignEnd="@id/imgCidade"
-                        android:layout_marginStart="5sp"
-                        android:layout_marginTop="5sp"
-                        android:layout_marginEnd="5sp"
-                        android:layout_marginBottom="5sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
+                        android:paddingHorizontal="10sp"
+                        android:paddingTop="30dp">
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/imgCidade"
+                            android:layout_width="match_parent"
+                            android:layout_height="167dp"
+                            android:scaleType="centerCrop"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/tvEstado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/imgCidade"
+                            android:layout_alignEnd="@id/imgCidade"
+                            android:layout_marginStart="5sp"
+                            android:layout_marginTop="5sp"
+                            android:layout_marginEnd="5sp"
+                            android:layout_marginBottom="5sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
 
             </FrameLayout>
 
@@ -183,9 +186,8 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="*"
                 android:layout_margin="10dp"
-                >
+                android:stretchColumns="*">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -356,6 +358,7 @@
                 </TableRow>
 
             </TableLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -371,10 +374,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5sp"
+                        android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="23sp"
-                        android:textStyle="bold"
-                        android:textAlignment="center"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -382,53 +385,51 @@
                     android:id="@+id/tvPontosTuristicos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Attractions"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     android:layout_marginVertical="5dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Attraction"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                     />
+                    android:textSize="16sp" />
 
                 <ListView
                     android:id="@+id/lvPontosTuristicos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingHorizontal="10dp"/>
+                    android:paddingHorizontal="10dp" />
 
                 <TextView
                     android:id="@+id/tvRestaurantes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Restaurants"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     android:layout_marginVertical="5dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Restaurant"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
 
                 <ListView
                     android:id="@+id/lvRestaurantes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingHorizontal="10dp"/>
+                    android:paddingHorizontal="10dp" />
 
                 <TextView
                     android:id="@+id/tvHoteis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hotels"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Hotel"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                     />
+                    android:textSize="16sp" />
 
                 <ListView
                     android:id="@+id/lvHoteis"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingHorizontal="10dp"/>
+                    android:paddingHorizontal="10dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

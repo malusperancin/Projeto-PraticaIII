@@ -73,7 +73,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edtEmail"
+        android:id="@+id/edtEmailCad"
         android:layout_width="305dp"
         android:layout_height="59dp"
 
@@ -121,9 +121,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtSenha"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.216" />
 
     <Button
         android:id="@+id/btnEsqueceu"
@@ -137,12 +138,13 @@
         android:backgroundTint="@color/cinzaToolbar"
         android:enabled="true"
         android:text="FORGOT PASSWORD"
-        android:textColor="#D3FFFFFF"
+        android:textColor="#1EAAF1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintVertical_bias="0.206"></Button>
+        app:layout_constraintVertical_bias="0.478"></Button>
 
     <ProgressBar
         android:id="@+id/loading"
@@ -179,8 +181,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_width="220dp"
+        android:layout_height="42dp"
         android:fontFamily="@font/bukhariscriptttf"
         android:text="Sign in to continue!"
         android:textColor="@color/cinzaToolbar"

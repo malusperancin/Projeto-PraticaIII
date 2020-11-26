@@ -83,7 +83,7 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <EditText
-        android:id="@+id/edtEmail"
+        android:id="@+id/edtEmailCad"
         android:layout_width="302dp"
         android:layout_height="50dp"
         android:hint="Email"
@@ -111,37 +111,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.576" />
 
-    <RadioButton
-        android:id="@+id/chkTermos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I accept all the terms and politics."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759" />
-
     <Button
         android:id="@+id/btnCadastro"
         android:layout_width="177dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
+        android:layout_marginTop="31dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button_lg"
         android:backgroundTint="#1EAAF1"
         android:enabled="true"
         android:text="SIGN UP"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chkTermos"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTermos" />
 
     <ProgressBar
         android:id="@+id/loading2"
@@ -158,5 +147,18 @@
         app:layout_constraintStart_toStartOf="@+id/edtSenha"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTermos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I accept all the terms and politics."
+        android:textColor="#736E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

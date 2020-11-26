@@ -1,31 +1,19 @@
 package cotuca.aplicativo.viaxar;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import java.util.HashMap;
 
-import cotuca.aplicativo.viaxar.R;
 import cotuca.aplicativo.viaxar.dbos.Usuario;
 import retrofit.Call;
 import retrofit.Callback;
@@ -55,7 +43,7 @@ public class InformationsFragment extends Fragment {
         final Button btnSalvarTudo = (Button) root.findViewById(R.id.btnSalvarTudo);
         final Button btnSalvarSenha = (Button) root.findViewById(R.id.btnSalvarSenha);
         final LinearLayout layout = (LinearLayout) root.findViewById(R.id.lt_trocarSenha);
-        edtEmail = (EditText) root.findViewById(R.id.edtEmail);
+        edtEmail = (EditText) root.findViewById(R.id.edtEmailCad);
         edtCell = (EditText) root.findViewById(R.id.edtCell);
         session = new SessionManager(getContext());
 

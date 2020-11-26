@@ -14,7 +14,8 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_menu_world"
-        app:layout_anchor="@id/bar" />
+        app:layout_anchor="@id/bar"
+        android:scaleType="centerCrop"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"

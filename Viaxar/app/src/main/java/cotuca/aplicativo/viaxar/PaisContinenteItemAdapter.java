@@ -50,7 +50,15 @@ public class PaisContinenteItemAdapter extends ArrayAdapter<Pais>{
 
         Pais pais = dados.get(position);
         imgBandeira.setImageBitmap(pais.getImagemBandeira());
+
+        if(pais.getNome().equals("Federated States of Micronesia"))
+            tvNome.setText("Micronesia");
+        else
+        if(pais.getNome().equals("United Arab Emirates"))
+            tvNome.setText("Emirates");
+        else
         tvNome.setText(pais.getNome());
+
         tvCapital.setText(pais.getCapital());
 
         view.setBackgroundResource(R.drawable.pais_continente_bg);

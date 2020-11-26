@@ -26,6 +26,7 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
     int layoutResourceId;
     List<Pais> dados;
     View view;
+    String continente;
 
     public PaisFavAdapter (@NonNull Context context, int resource, @NonNull List<Pais> dados) {
         super(context, resource, dados);
@@ -64,7 +65,22 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
             imgBandeira.setImageBitmap(pais.getImagemBandeira());
         }
         tvNome.setText(pais.getNome());
-        tvContinente.setText(pais.getContinente());
+
+        switch (pais.getContinente())
+        {
+            case "EU": continente = "Europe";
+                break;
+            case "AM": continente = "America";
+                break;
+            case "OC": continente = "Oceania";
+                break;
+            case "AS": continente = "Asia";
+                break;
+            case "AF": continente = "Africa";
+                break;
+
+        }
+        tvContinente.setText(continente);
 
         ImageView fav = (ImageView) view.findViewById(R.id.imgCoracaoVermelho);
         fav.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +94,6 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
                     public void onResponse(Response<Usuario> response, Retrofit retrofit) {
                         if(response.isSuccess()) //conectou com o node
                         {
-                            Toast.makeText(getContext(), "uhul foi", Toast.LENGTH_LONG).show();
                             parent.removeViewInLayout(parent.getChildAt(position));
                         }
                         else
