@@ -367,12 +367,12 @@ public class PaisActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Response<Usuario> response, Retrofit retrofit) {
                     if (!response.isSuccess()) //conectou com o node
-                        Toast.makeText(getApplication(), "Ocorreu um erro ao excluir o pais fav", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(), "There was an error deleting your favorite country", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "A network error has occurred", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -385,12 +385,12 @@ public class PaisActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response<Pais> response, Retrofit retrofit) {
                 if(!response.isSuccess()) //conectou com o node
-                    Toast.makeText(getApplication(), "Erro ao adicionar esse país aos favoritos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "Error adding this country to favorites", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), "Network error occurred", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -420,14 +420,14 @@ public class PaisActivity extends AppCompatActivity {
                         lgbt.setText("Not safe");
                 }
                 else {
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações deste país", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "There was an error retrieving information for this country", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), "A network error has occurred", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -446,7 +446,7 @@ public class PaisActivity extends AppCompatActivity {
                     task.execute();
                 }
                 else {
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações dos pontos turísticos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "An error occurred while retrieving tourist information", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
@@ -473,14 +473,15 @@ public class PaisActivity extends AppCompatActivity {
                     task.execute();
                 }
                 else {
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações dos restaurantes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "There was an error retrieving restaurant information", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(),
+                        "A network error has occurred", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -499,14 +500,14 @@ public class PaisActivity extends AppCompatActivity {
                     task.execute();
                 }
                 else {
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações dos hoteis", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "There was an error retrieving hotel information", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(), "A network error has occurred", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -527,7 +528,8 @@ public class PaisActivity extends AppCompatActivity {
                         fav.setImageDrawable(getResources().getDrawable(R.drawable.nao_fav));
                 }
                 else {
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar as informações deste país", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),
+                            "An error occurred while retrieving information for this country", Toast.LENGTH_LONG).show();
                     finish();
                 }
 
@@ -535,7 +537,8 @@ public class PaisActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(),
+                        "A network error has occurred", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -554,14 +557,16 @@ public class PaisActivity extends AppCompatActivity {
                     task.execute();
                 }
                 else {
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),
+                            "An error occurred while retrieving favorite countries", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(),
+                        "A network error has occurred", Toast.LENGTH_LONG).show();
                 finish();
             }
         });

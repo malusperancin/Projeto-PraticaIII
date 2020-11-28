@@ -35,26 +35,7 @@ public class TravelerKitFragment extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //spinner1.setAdapter(adapter);
-        //spinnerCategoria.setAdapter(adapter);
-
         btnCambio = (Button)root.findViewById(R.id.btnCambio);
-        btnCambio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*if (edtPass.getVisibility() == EditText.GONE) {
-                    edtOld.setVisibility(EditText.VISIBLE);
-                    edtPass.setVisibility(EditText.VISIBLE);
-                    edtPassConfirm.setVisibility(EditText.VISIBLE);
-                    btnSalvarSenha.setVisibility(EditText.VISIBLE);
-                } else {
-                    edtOld.setVisibility(EditText.GONE);
-                    edtPass.setVisibility(EditText.GONE);
-                    edtPassConfirm.setVisibility(EditText.GONE);
-                    btnSalvarSenha.setVisibility(EditText.GONE);
-                }*/
-            }
-        });
         btnMedida = (Button)root.findViewById(R.id.btnMedida);
         btnRoupa= (Button)root.findViewById(R.id.btnRoupa);
         btnDDD = (Button)root.findViewById(R.id.btnDDD);

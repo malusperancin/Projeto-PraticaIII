@@ -127,26 +127,21 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccess()) //conectou com o node
                 {
                     listaPais = response.body();
-                    //MyTask task = new MyTask();
-                    //task.execute();
+                    MyTask task = new MyTask();
+                    task.execute();
                 }
                 else
-                    Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "An error occurred while retrieving countries", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getActivity(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "A network error has occurred", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private class MyTask extends AsyncTask<String, String, List<Pais>> {
-
-        @Override
-        protected void onPreExecute() {
-            //progressBar.setVisibility(View.VISIBLE);
-        }
 
         @Override
         protected List<Pais> doInBackground(String... params) {

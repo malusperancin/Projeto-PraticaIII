@@ -67,12 +67,12 @@ public class FavoritesFragment extends Fragment {
                     task.execute();
                 }
                 else
-                    Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "There was an error retrieving your favorite countries", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getActivity(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "A network error has occurred", Toast.LENGTH_LONG).show();
             }
         });
     }

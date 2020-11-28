@@ -71,7 +71,7 @@ public class InformationsFragment extends Fragment {
             if (usuario.getCelular() != null)
                 edtCell.setText(usuario.getCelular());
         } catch (Exception ex) {
-            Toast.makeText(this.getContext(), "erro", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getContext(), "Erro", Toast.LENGTH_LONG).show();
         }
 
         btnSalvarSenha.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class InformationsFragment extends Fragment {
                     btnAlterarSenha.callOnClick();
                 }
                 else
-                    Toast.makeText(getContext(), "Senhas não coincidentes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Mismatched passwords", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -121,13 +121,13 @@ public class InformationsFragment extends Fragment {
             @Override
             public void onResponse(Response response, Retrofit retrofit) {
                 if (response.isSuccess()) //  precisa do isSuccess se a gente der exceção no node
-                    Toast.makeText(getContext(), "Senha trocada com sucesso", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(getContext(), "Erro ao trocar senha", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error changing password", Toast.LENGTH_LONG).show();
             }
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getContext(), "Erro ao trocar senha", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Error changing password", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -151,17 +151,17 @@ public class InformationsFragment extends Fragment {
                     if (response.body() == null) {
                         session.editor.putString(session.EMAIL,edtEmail.getText().toString());
                         session.editor.putString(session.CELULAR,edtCell.getText().toString());
-                        Toast.makeText(getContext(), "Usuario alterado no sucesso", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Updated", Toast.LENGTH_LONG).show();
                     }
                     else
-                        Toast.makeText(getContext(), "Erro ao dar update", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Error updating", Toast.LENGTH_LONG).show();
                 }
                 else
-                    Toast.makeText(getContext(), "Erro ao dar update", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error updating", Toast.LENGTH_LONG).show();
             }
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getContext(), "Ocorreu um erro na requisição", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "There was an error in the request", Toast.LENGTH_LONG).show();
             }
         });
     }

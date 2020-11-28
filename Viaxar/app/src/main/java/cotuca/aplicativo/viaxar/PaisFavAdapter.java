@@ -97,12 +97,12 @@ public class PaisFavAdapter extends ArrayAdapter<Pais> {
                             parent.removeViewInLayout(parent.getChildAt(position));
                         }
                         else
-                            Toast.makeText(getContext(), "Ocorreu um erro ao excluir o pais fav", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "There was an error deleting your favorite country", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
-                        Toast.makeText(getContext(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "A network error has occurred", Toast.LENGTH_LONG).show();
                     }
 
                 });

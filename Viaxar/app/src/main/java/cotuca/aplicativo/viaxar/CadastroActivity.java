@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class CadastroActivity extends AppCompatActivity {
 
     TextView tvTelaLogin;
-    EditText edtNome, edtSenha, edtEmail;
+    EditText edtSenha, edtEmail;
     Button btnSalvar;
 
     @Override
@@ -59,7 +59,7 @@ public class CadastroActivity extends AppCompatActivity {
         catch (Exception ex){}
 
         if(usuario == null){
-            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Fill all blanks", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -76,15 +76,15 @@ public class CadastroActivity extends AppCompatActivity {
                         finish();
                     }
                     else
-                        Toast.makeText(getApplicationContext(), "Email ja cadastrado", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Email already registered", Toast.LENGTH_LONG).show();
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Ocorreu um erro na inclusão", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "An error occurred while adding", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplicationContext(), "Ocorreu um erro na requisição", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "There was an error in the request", Toast.LENGTH_LONG).show();
             }
         });
     }

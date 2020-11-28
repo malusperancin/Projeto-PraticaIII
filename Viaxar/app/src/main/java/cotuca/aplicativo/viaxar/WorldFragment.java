@@ -123,12 +123,12 @@ public class WorldFragment extends Fragment {
                     marcar(googleMap);
                 }
                 else
-                    Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar os paises", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "There was an error retrieving countries", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getActivity(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "A network error has occurred", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -149,12 +149,12 @@ public class WorldFragment extends Fragment {
                     startActivity(intent);
                 }
                 else
-                    Toast.makeText(getActivity(), "Ocorreu um erro ao recuperar o pais selecionado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "An error occurred while retrieving the selected country", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getActivity(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "A network error has occurred", Toast.LENGTH_LONG).show();
             }
         });
     }

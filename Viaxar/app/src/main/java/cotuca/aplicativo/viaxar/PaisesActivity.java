@@ -97,12 +97,14 @@ public class PaisesActivity extends AppCompatActivity {
                     //atualizarView();
                 }
                 else
-                    Toast.makeText(getApplication(), "Ocorreu um erro ao recuperar os paises favs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),
+                            "An error occurred while retrieving favorite countries", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplication(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplication(),
+                        "A network error has occurred", Toast.LENGTH_LONG).show();
             }
         });
     }

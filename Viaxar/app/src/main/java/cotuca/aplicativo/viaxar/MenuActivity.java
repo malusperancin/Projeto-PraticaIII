@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.nav_exit)
-                session.logout();
+                    session.logout();
                 return NavigationUI.onNavDestinationSelected(item, navController);
             }
         });

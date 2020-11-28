@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         if (email == null || email.equals("") || senha == null || senha.equals(""))
         {
-            Toast.makeText(this, "Insira o email e a senha", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Enter email and password", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -73,16 +73,16 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "Conta n encontrada ou senha errada", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Account not found or wrong password", Toast.LENGTH_LONG).show();
                     }
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Erro ao buscar pelo usuario", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error searching for user", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(getApplicationContext(), "Ocorreu um erro na rede", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "A network error has occurred", Toast.LENGTH_LONG).show();
             }
         });
     }
